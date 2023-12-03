@@ -50,6 +50,36 @@ constexpr uint_192 operator<<(const uint_192 &number, const uint64_t shift) noex
     return result;
 }
 
+constexpr bool operator ==(const uint_192 &lhs, const uint_192 &rhs) {
+    return lhs.parts == rhs.parts;
+}
+
+constexpr bool operator !=(const uint_192 &lhs, const uint_192 &rhs) {
+    return lhs.parts != rhs.parts;;
+}
+
+constexpr bool operator <(const uint_192 &lhs, const uint_192 &rhs) {
+    for (uint64_t part_index = lhs.parts.size() -1 ; part_index < static_cast<uint64_t>(-1); --part_index) {
+        if (lhs.parts[part_index] < rhs.parts[part_index])
+            return true;
+        if (lhs.parts[part_index] > rhs.parts[part_index])
+            return false;
+    }
+    return false;
+}
+
+constexpr bool operator <=(const uint_192 &lhs, const uint_192 &rhs) {
+    return lhs == rhs || lhs < rhs;
+}
+
+constexpr bool operator >(const uint_192 &lhs, const uint_192 &rhs) {
+    return !(lhs <= rhs);
+}
+
+constexpr bool operator >=(const uint_192 &lhs, const uint_192 &rhs) {
+    return !(lhs < rhs);
+}
+
 } // namespace uint192_lib
 
 #endif // MY_UINT192_UINT_192_HPP
