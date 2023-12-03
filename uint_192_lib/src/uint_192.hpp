@@ -53,8 +53,7 @@ constexpr uint_192 operator>>(const uint_192 &number, const uint64_t shift) noex
     uint64_t carry{};
 
     if (shift < UINT64_WIDTH) {
-        for (uint64_t part_index = number.parts.size() - 1; part_index < static_cast<uint64_t>(-1);
-             --part_index) {
+        for (uint64_t part_index = number.parts.size() - 1; part_index < static_cast<uint64_t>(-1); --part_index) {
             result.parts[part_index] += carry;
             carry = number.parts[part_index] << (UINT64_WIDTH - shift);
             uint64_t shifted = number.parts[part_index] >> shift;
@@ -64,10 +63,9 @@ constexpr uint_192 operator>>(const uint_192 &number, const uint64_t shift) noex
     } else {
         const uint64_t shift_adjust = shift % UINT64_WIDTH;
         const uint64_t shift_offset = shift / UINT64_WIDTH;
-        for (uint64_t part_index = number.parts.size() - shift_offset - 1;
-             part_index < static_cast<uint64_t>(-1); --part_index) {
-            const uint64_t shift_from_index = part_index + shift_offset;
-            result.parts[part_index] = number.parts[shift_from_index] >> shift_adjust;
+        for (uint64_t part_index = shift_offset; part_index < number.parts.size(); ++part_index) {
+            const uint64_t shift_to_index = part_index - shift_offset;
+            result.parts[shift_to_index] = number.parts[part_index] >> shift_adjust;
         }
     }
 

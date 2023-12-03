@@ -6,7 +6,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <uint_192.hpp>
 
-TEST_CASE("Shifting it by UINT64_MAX bits returns an empty result") {
+TEST_CASE("Shifting left by UINT64_MAX bits returns an empty result") {
     auto result = uint192_lib::uint_192{1} << UINT64_MAX;
     REQUIRE(result.parts[0] == 0);
     REQUIRE(result.parts[1] == 0);
