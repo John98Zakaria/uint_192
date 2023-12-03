@@ -6,7 +6,7 @@
 #include <catch2/catch_test_macros.hpp>
 #include <uint_192.hpp>
 
-SCENARIO("Shifting works") {
+SCENARIO("Shifting left works") {
 
     GIVEN("A uint_192 of value {1,0,0}") {
         uint192_lib::uint_192 a{1};
