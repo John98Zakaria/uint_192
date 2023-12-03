@@ -6,6 +6,13 @@
 #include <catch2/catch_test_macros.hpp>
 #include <uint_192.hpp>
 
+TEST_CASE("Shifting it by UINT64_MAX bits returns an empty result") {
+    auto result = uint192_lib::uint_192{1} << UINT64_MAX;
+    REQUIRE(result.parts[0] == 0);
+    REQUIRE(result.parts[1] == 0);
+    REQUIRE(result.parts[2] == 0);
+}
+
 SCENARIO("Shifting left works") {
 
     GIVEN("A uint_192 of value {1,0,0}") {
@@ -45,6 +52,13 @@ SCENARIO("Shifting left works") {
             REQUIRE(result.parts[1] == 0);
             REQUIRE(result.parts[2] == 1);
         }
+
+        THEN("Shifting it by 192 bits returns an empty result") {
+            auto result = a << UINT64_WIDTH * 3;
+            REQUIRE(result.parts[0] == 0);
+            REQUIRE(result.parts[1] == 0);
+            REQUIRE(result.parts[2] == 0);
+        }
     }
 
     GIVEN("A uint_192 of value {0,1,0}") {
@@ -80,6 +94,13 @@ SCENARIO("Shifting left works") {
 
         THEN("Shifting it by 128 bit returns an empty result") {
             auto result = a << UINT64_WIDTH * 2;
+            REQUIRE(result.parts[0] == 0);
+            REQUIRE(result.parts[1] == 0);
+            REQUIRE(result.parts[2] == 0);
+        }
+
+        THEN("Shifting it by 192 bits returns an empty result") {
+            auto result = a << UINT64_WIDTH * 3;
             REQUIRE(result.parts[0] == 0);
             REQUIRE(result.parts[1] == 0);
             REQUIRE(result.parts[2] == 0);
@@ -123,6 +144,13 @@ SCENARIO("Shifting left works") {
             REQUIRE(result.parts[1] == 0);
             REQUIRE(result.parts[2] == 0);
         }
+
+        THEN("Shifting it by 192 bits returns an empty result") {
+            auto result = a << UINT64_WIDTH * 3;
+            REQUIRE(result.parts[0] == 0);
+            REQUIRE(result.parts[1] == 0);
+            REQUIRE(result.parts[2] == 0);
+        }
     }
 
     GIVEN("A uint_192 of value {1,1,0}") {
@@ -161,6 +189,13 @@ SCENARIO("Shifting left works") {
             REQUIRE(result.parts[0] == 0);
             REQUIRE(result.parts[1] == 0);
             REQUIRE(result.parts[2] == 1);
+        }
+
+        THEN("Shifting it by 192 bits returns an empty result") {
+            auto result = a << UINT64_WIDTH * 3;
+            REQUIRE(result.parts[0] == 0);
+            REQUIRE(result.parts[1] == 0);
+            REQUIRE(result.parts[2] == 0);
         }
     }
 
@@ -201,6 +236,13 @@ SCENARIO("Shifting left works") {
             REQUIRE(result.parts[1] == 0);
             REQUIRE(result.parts[2] == UINT64_MAX);
         }
+
+        THEN("Shifting it by 192 bits returns an empty result") {
+            auto result = a << UINT64_WIDTH * 3;
+            REQUIRE(result.parts[0] == 0);
+            REQUIRE(result.parts[1] == 0);
+            REQUIRE(result.parts[2] == 0);
+        }
     }
 
     GIVEN("A uint_192 of value {UINT64_MAX, UINT64_MAX,0}") {
@@ -239,6 +281,13 @@ SCENARIO("Shifting left works") {
             REQUIRE(result.parts[0] == 0);
             REQUIRE(result.parts[1] == 0);
             REQUIRE(result.parts[2] == UINT64_MAX);
+        }
+
+        THEN("Shifting it by 192 bits returns an empty result") {
+            auto result = a << UINT64_WIDTH * 3;
+            REQUIRE(result.parts[0] == 0);
+            REQUIRE(result.parts[1] == 0);
+            REQUIRE(result.parts[2] == 0);
         }
     }
 }
