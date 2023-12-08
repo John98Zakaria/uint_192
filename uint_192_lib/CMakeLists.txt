@@ -10,5 +10,3 @@ set_target_properties(uint_192_lib PROPERTIES LINKER_LANGUAGE CXX)
 target_include_directories(uint_192_lib INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/src")
 
 add_subdirectory(tests)
-
-add_executable(main main.cpp)
