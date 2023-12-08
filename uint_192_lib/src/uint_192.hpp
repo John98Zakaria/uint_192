@@ -12,7 +12,7 @@ struct uint_192 {
     std::array<std::uint64_t, 3> parts;
 };
 
-constexpr uint_192 operator+=(const uint_192 &lhs, const uint_192 &rhs) noexcept {
+constexpr uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) noexcept {
     uint_192 result{};
     uint64_t carry_bit{0};
 
