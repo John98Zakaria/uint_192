@@ -18,6 +18,13 @@ SCENARIO("Shifting left works") {
     GIVEN("A uint_192 of value {1,0,0}") {
         uint192_lib::uint_192 a{1};
 
+        THEN("Shifting it by 0 bits works") {
+            auto result = a << 0;
+            REQUIRE(result.parts[0] == 1);
+            REQUIRE(result.parts[1] == 0);
+            REQUIRE(result.parts[2] == 0);
+        }
+
         THEN("Shifting it by 1 bit works") {
             auto result = a << 1;
             REQUIRE(result.parts[0] == 2);
@@ -43,6 +50,20 @@ SCENARIO("Shifting left works") {
             auto result = a << UINT64_WIDTH;
             REQUIRE(result.parts[0] == 0);
             REQUIRE(result.parts[1] == 1);
+            REQUIRE(result.parts[2] == 0);
+        }
+
+        THEN("Shifting it by 65 bits works") {
+            auto result = a << 65;
+            REQUIRE(result.parts[0] == 0);
+            REQUIRE(result.parts[1] == 2);
+            REQUIRE(result.parts[2] == 0);
+        }
+
+        THEN("Shifting it by 96 bits works") {
+            auto result = a << 96;
+            REQUIRE(result.parts[0] == 0);
+            REQUIRE(result.parts[1] == 1UL << 32UL);
             REQUIRE(result.parts[2] == 0);
         }
 
@@ -288,6 +309,17 @@ SCENARIO("Shifting left works") {
             REQUIRE(result.parts[0] == 0);
             REQUIRE(result.parts[1] == 0);
             REQUIRE(result.parts[2] == 0);
+        }
+    }
+
+    GIVEN("A uint_192 of value {8589934590, 0 ,0}") {
+        uint192_lib::uint_192 a{8589934590, 0, 0};
+
+        THEN("Shifting it by 96 bit works correctly") {
+            auto result = a << 96;
+            REQUIRE(result.parts[0] == 0);
+            REQUIRE(result.parts[1] == 18446744065119617024UL);
+            REQUIRE(result.parts[2] == 1);
         }
     }
 }
