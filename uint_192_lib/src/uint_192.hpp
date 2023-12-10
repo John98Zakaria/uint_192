@@ -10,6 +10,18 @@
 namespace uint192_lib {
 struct uint_192 {
     std::array<std::uint64_t, 3> parts;
+
+    constexpr uint_192 &operator+=(const uint_192 &rhs) noexcept {
+        uint64_t carry_bit{0};
+
+        for (uint64_t i = 0; i < this->parts.size(); ++i) {
+            this->parts[i] += carry_bit;
+            this->parts[i] += rhs.parts[i];
+            carry_bit = this->parts[i] < rhs.parts[i];
+        }
+
+        return *this;
+    }
 };
 
 constexpr uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) noexcept {
