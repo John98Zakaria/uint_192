@@ -24,6 +24,10 @@ struct uint_192 {
     }
 };
 
+constexpr uint32_t LOWER_BITMASK = UINT32_MAX;
+
+static_assert((UINT64_MAX & LOWER_BITMASK) == UINT32_MAX);
+
 constexpr uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) noexcept {
     uint_192 result{};
     uint64_t carry_bit{0};
@@ -86,6 +90,35 @@ constexpr bool operator>(const uint_192 &lhs, const uint_192 &rhs) {
 
 constexpr bool operator>=(const uint_192 &lhs, const uint_192 &rhs) {
     return !(lhs < rhs);
+}
+
+constexpr uint_192 operator*(const uint_192 &lhs, const uint_192 &rhs) {
+    uint_192 result{};
+
+    for (int lhs_iterator = 0; lhs_iterator < lhs.parts.size(); ++lhs_iterator) {
+        const uint32_t lhs_lower_bits = lhs.parts[lhs_iterator] & UINT32_MAX;
+        const uint32_t lhs_upper_bits = lhs.parts[lhs_iterator] >> UINT32_WIDTH;
+        for (int rhs_iterator = 0; rhs_iterator < rhs.parts.size(); ++rhs_iterator) {
+            const uint32_t rhs_lower_bits = rhs.parts[rhs_iterator] & UINT32_MAX;
+            const uint32_t rhs_upper_bits = rhs.parts[rhs_iterator] >> UINT32_WIDTH;
+
+            const uint_192 lower_lower = uint_192{lhs_lower_bits * rhs_lower_bits};
+            const uint_192 lower_upper = uint_192{lhs_lower_bits * rhs_upper_bits};
+            const uint_192 upper_lower = uint_192{lhs_upper_bits * rhs_lower_bits};
+            const uint_192 upper_upper = uint_192{lhs_upper_bits * rhs_upper_bits};
+
+            uint64_t iteration_shift = (lhs_iterator + rhs_iterator) * UINT64_WIDTH;
+            uint64_t lower_upper_shift = iteration_shift + UINT32_WIDTH;
+            uint64_t upper_upper_shift = iteration_shift + UINT64_WIDTH;
+
+            result += (lower_lower << iteration_shift);
+            result += (lower_upper << lower_upper_shift);
+            result += (upper_lower << lower_upper_shift);
+            result += (upper_upper << upper_upper_shift);
+        }
+    }
+
+    return result;
 }
 
 } // namespace uint192_lib
