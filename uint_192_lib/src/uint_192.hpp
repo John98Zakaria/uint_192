@@ -28,20 +28,18 @@ constexpr uint_192 operator<<(const uint_192 &number, const uint64_t shift) noex
     uint_192 result{};
     uint64_t carry{};
 
-    if (shift < UINT64_WIDTH) {
-        for (uint64_t current_position = 0; current_position < number.parts.size(); ++current_position) {
-            result.parts[current_position] += carry;
-            carry = number.parts[current_position] >> (UINT64_WIDTH - shift);
-            uint64_t shifted = number.parts[current_position] << shift;
-            result.parts[current_position] += shifted;
-        }
-
+    // Prevent UB when shifting by (UINT64_WIDTH - 0) => 64
+    if (shift == 0) {
+        result = number;
     } else {
         const uint64_t shift_adjust = shift % UINT64_WIDTH;
         const uint64_t shift_offset = shift / UINT64_WIDTH;
+        const uint64_t carry_shifting = UINT64_WIDTH - shift_adjust;
         for (uint64_t current_position = shift_offset; current_position < number.parts.size(); ++current_position) {
+            result.parts[current_position] += carry;
             const uint64_t shift_from_index = current_position - shift_offset;
-            result.parts[current_position] = number.parts[shift_from_index] << shift_adjust;
+            result.parts[current_position] += number.parts[shift_from_index] << shift_adjust;
+            carry = carry_shifting == 64 ? 0 : number.parts[shift_from_index] >> carry_shifting;
         }
     }
 
