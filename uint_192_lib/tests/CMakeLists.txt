@@ -21,3 +21,4 @@ foreach (test_executable ${test_executables})
 
 endforeach ()
 
+add_subdirectory(fuzz_testing)
