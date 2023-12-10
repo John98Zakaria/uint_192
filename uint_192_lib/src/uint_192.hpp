@@ -46,11 +46,12 @@ constexpr uint_192 operator<<(const uint_192 &number, const uint64_t shift) noex
     return result;
 }
 
-constexpr bool operator==(const uint_192 &lhs, const uint_192 &rhs) { return lhs.parts == rhs.parts; }
+constexpr bool operator==(const uint_192 &lhs, const uint_192 &rhs) {
+    return lhs.parts == rhs.parts;
+}
 
 constexpr bool operator!=(const uint_192 &lhs, const uint_192 &rhs) {
     return lhs.parts != rhs.parts;
-    ;
 }
 
 constexpr bool operator<(const uint_192 &lhs, const uint_192 &rhs) {
@@ -63,12 +64,17 @@ constexpr bool operator<(const uint_192 &lhs, const uint_192 &rhs) {
     return false;
 }
 
-constexpr bool operator<=(const uint_192 &lhs, const uint_192 &rhs) { return lhs == rhs || lhs < rhs; }
+constexpr bool operator<=(const uint_192 &lhs, const uint_192 &rhs) {
+    return lhs == rhs || lhs < rhs;
+}
 
-constexpr bool operator>(const uint_192 &lhs, const uint_192 &rhs) { return !(lhs <= rhs); }
+constexpr bool operator>(const uint_192 &lhs, const uint_192 &rhs) {
+    return !(lhs <= rhs);
+}
 
-constexpr bool operator>=(const uint_192 &lhs, const uint_192 &rhs) { return !(lhs < rhs); }
-
+constexpr bool operator>=(const uint_192 &lhs, const uint_192 &rhs) {
+    return !(lhs < rhs);
+}
 
 } // namespace uint192_lib
 
