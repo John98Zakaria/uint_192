@@ -6,6 +6,7 @@
 
 #ifndef MY_UINT192_UINT_192_HPP
 #define MY_UINT192_UINT_192_HPP
+#include <bitset>
 
 namespace uint192_lib {
 struct uint_192 {
@@ -21,6 +22,14 @@ struct uint_192 {
         }
 
         return *this;
+    }
+
+    [[nodiscard]] std::string to_bin_string() const {
+        std::bitset<64> lower(this->parts[0]);
+        std::bitset<64> mid(this->parts[1]);
+        std::bitset<64> upper(this->parts[2]);
+
+        return upper.to_string() + mid.to_string() + lower.to_string();
     }
 };
 
