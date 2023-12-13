@@ -2,9 +2,7 @@
 // Created by jn98zk on 26.11.23.
 //
 
-#include <catch2/benchmark/catch_benchmark.hpp>
 #include <catch2/catch_test_macros.hpp>
-#include <catch2/generators/catch_generators.hpp>
 #include <uint_192.hpp>
 
 #include <iostream>

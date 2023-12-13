@@ -5,9 +5,6 @@
 #ifndef MY_UINT192_CATCH2_UINT192_GENERATOR_HPP
 #define MY_UINT192_CATCH2_UINT192_GENERATOR_HPP
 
-#include <catch2/benchmark/catch_benchmark.hpp>
-#include <catch2/catch_test_macros.hpp>
-#include <catch2/generators/catch_generators.hpp>
 #include <catch2/generators/catch_generators_all.hpp>
 #include <gmpxx.h>
 #include <iostream>

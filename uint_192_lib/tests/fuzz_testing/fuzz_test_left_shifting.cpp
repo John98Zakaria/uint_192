@@ -1,6 +1,7 @@
 //
 // Created by jn98zk on 26.11.23.
 //
+#include <catch2/catch_test_macros.hpp>
 
 #include "catch2_uint192_generator.hpp"
 

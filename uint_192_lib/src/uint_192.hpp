@@ -3,10 +3,11 @@
 //
 #include <array>
 #include <cstdint>
+#include <bitset>
 
 #ifndef MY_UINT192_UINT_192_HPP
 #define MY_UINT192_UINT_192_HPP
-#include <bitset>
+
 
 namespace uint192_lib {
 struct uint_192 {

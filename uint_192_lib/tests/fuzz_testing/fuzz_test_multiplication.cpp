@@ -3,8 +3,7 @@
 //
 
 #include "catch2_uint192_generator.hpp"
-
-#include <uint_192.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 TEST_CASE("Compare multiplication to GMP") {
     const auto lhs_uint192 = GENERATE(take(120, randomUint192(UINT64_MAX, UINT64_MAX, UINT64_MAX)));
