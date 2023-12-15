@@ -50,6 +50,18 @@ constexpr uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) noexcept 
     return result;
 }
 
+constexpr uint_192 operator-(const uint_192 &lhs, const uint_192 &rhs) noexcept {
+    uint_192 result{};
+    uint64_t carry_bit{0};
+    uint64_t subtrahend;
+    for (uint64_t i = 0; i < lhs.parts.size(); ++i) {
+        subtrahend = rhs.parts[i] + carry_bit;
+        carry_bit = lhs.parts[i] < subtrahend;
+        result.parts[i] = lhs.parts[i] - subtrahend;
+    }
+    return result;
+}
+
 constexpr uint_192 operator<<(const uint_192 &number, const uint64_t shift) noexcept {
     uint_192 result{};
     uint64_t carry{};
