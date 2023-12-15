@@ -25,7 +25,7 @@ SCENARIO("Multiplication") {
         }
     }
 
-    GIVEN("A uint_192 of value {UINT_64MAX,0,0}") {
+    GIVEN("A uint_192 of value {UINT64_MAX,0,0}") {
         uint192_lib::uint_192 a{UINT64_MAX};
 
         THEN("Multiplying by 1 results in the identity") {
@@ -66,7 +66,7 @@ SCENARIO("Multiplication") {
         }
     }
 
-    GIVEN("A uint_192 of value {0,UINT_64MAX,0}") {
+    GIVEN("A uint_192 of value {0,UINT64_MAX,0}") {
         uint192_lib::uint_192 a{0, UINT64_MAX};
 
         THEN("Multiplying by 1 results in the identity") {
