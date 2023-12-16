@@ -105,11 +105,11 @@ constexpr bool operator>=(const uint_192 &lhs, const uint_192 &rhs) {
 constexpr uint_192 operator*(const uint_192 &lhs, const uint_192 &rhs) {
     uint_192 result{};
 
-    for (int lhs_iterator = 0; lhs_iterator < lhs.parts.size(); ++lhs_iterator) {
-        const uint64_t lhs_lower_bits = lhs.parts[lhs_iterator] & UINT32_MAX;
+    for (uint64_t lhs_iterator = 0; lhs_iterator < lhs.parts.size(); ++lhs_iterator) {
+        const uint64_t lhs_lower_bits = lhs.parts[lhs_iterator] & LOWER_BITMASK;
         const uint64_t lhs_upper_bits = lhs.parts[lhs_iterator] >> UINT32_WIDTH;
-        for (int rhs_iterator = 0; rhs_iterator < rhs.parts.size(); ++rhs_iterator) {
-            const uint64_t rhs_lower_bits = rhs.parts[rhs_iterator] & UINT32_MAX;
+        for (uint64_t rhs_iterator = 0; rhs_iterator < rhs.parts.size(); ++rhs_iterator) {
+            const uint64_t rhs_lower_bits = rhs.parts[rhs_iterator] & LOWER_BITMASK;
             const uint64_t rhs_upper_bits = rhs.parts[rhs_iterator] >> UINT32_WIDTH;
 
             const uint_192 lower_lower = uint_192{lhs_lower_bits * rhs_lower_bits};
