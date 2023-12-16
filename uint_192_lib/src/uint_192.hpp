@@ -154,8 +154,8 @@ constexpr uint_192 operator*(const uint_192 &lhs, const uint_192 &rhs) {
     return result;
 }
 
-[[nodiscard]] constexpr div_rem_1 div1_rem(const uint_192 &dividend, uint64_t divisor) {
-    div_rem_1 result{};
+[[nodiscard]] constexpr uint192_div_rem div_rem(const uint_192 &dividend, const uint32_t divisor) {
+    uint192_div_rem<uint64_t> result{};
     uint64_t intermediate_division_result;
     for (uint64_t part_index = dividend.parts.size() - 1; part_index < static_cast<uint64_t>(-1); --part_index) {
         uint64_t upper_part = dividend.parts[part_index] >> UINT32_WIDTH;
