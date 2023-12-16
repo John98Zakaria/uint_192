@@ -40,11 +40,6 @@ struct uint_192 {
     }
 };
 
-struct div_rem_1 {
-    uint_192 quotient;
-    uint64_t reminder;
-};
-
 constexpr uint32_t LOWER_BITMASK = UINT32_MAX;
 
 static_assert((UINT64_MAX & LOWER_BITMASK) == UINT32_MAX);
@@ -154,8 +149,15 @@ constexpr uint_192 operator*(const uint_192 &lhs, const uint_192 &rhs) {
     return result;
 }
 
-[[nodiscard]] constexpr uint192_div_rem div_rem(const uint_192 &dividend, const uint32_t divisor) {
-    uint192_div_rem<uint64_t> result{};
+template <typename T> struct uint192_div_rem {
+    uint_192 quotient;
+    T reminder;
+};
+
+using div_mod_uint32_remider = uint192_div_rem<uint64_t>;
+
+[[nodiscard]] constexpr div_mod_uint32_remider div_mod(const uint_192 &dividend, const uint32_t divisor) {
+    div_mod_uint32_remider result{};
     uint64_t intermediate_division_result;
     for (uint64_t part_index = dividend.parts.size() - 1; part_index < static_cast<uint64_t>(-1); --part_index) {
         uint64_t upper_part = dividend.parts[part_index] >> UINT32_WIDTH;
