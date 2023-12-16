@@ -40,6 +40,11 @@ struct uint_192 {
     }
 };
 
+struct div_rem_1 {
+    uint_192 quotient;
+    uint64_t reminder;
+};
+
 constexpr uint32_t LOWER_BITMASK = UINT32_MAX;
 
 static_assert((UINT64_MAX & LOWER_BITMASK) == UINT32_MAX);
@@ -144,6 +149,29 @@ constexpr uint_192 operator*(const uint_192 &lhs, const uint_192 &rhs) {
             result += (upper_lower << lower_upper_shift);
             result += (upper_upper << upper_upper_shift);
         }
+    }
+
+    return result;
+}
+
+[[nodiscard]] constexpr div_rem_1 div1_rem(const uint_192 &dividend, uint64_t divisor) {
+    div_rem_1 result{};
+    uint64_t intermediate_division_result;
+    for (uint64_t part_index = dividend.parts.size() - 1; part_index < static_cast<uint64_t>(-1); --part_index) {
+        uint64_t upper_part = dividend.parts[part_index] >> UINT32_WIDTH;
+        uint64_t lower_part = dividend.parts[part_index] & LOWER_BITMASK;
+        // We add the reminder to the upper part of the upper_part
+        upper_part = (result.reminder << UINT32_WIDTH) | upper_part;
+        intermediate_division_result = upper_part / divisor;
+        result.reminder = upper_part - (divisor * intermediate_division_result);
+        result.quotient.parts[part_index] = intermediate_division_result << UINT32_WIDTH;
+
+        // We add the reminder to the upper part of the lower_part
+        lower_part = (result.reminder << UINT32_WIDTH) | lower_part;
+        intermediate_division_result = lower_part / divisor;
+        result.reminder = lower_part - (divisor * intermediate_division_result);
+        // We add the division result to the lower bits
+        result.quotient.parts[part_index] |= intermediate_division_result;
     }
 
     return result;
