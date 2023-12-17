@@ -59,7 +59,7 @@ constexpr uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) noexcept 
 constexpr uint_192 operator-(const uint_192 &lhs, const uint_192 &rhs) noexcept {
     uint_192 result{};
     uint64_t carry_bit{0};
-    uint64_t subtrahend;
+    uint64_t subtrahend{};
     for (uint64_t i = 0; i < lhs.parts.size(); ++i) {
         subtrahend = rhs.parts[i] + carry_bit;
         carry_bit = lhs.parts[i] < subtrahend;
@@ -158,7 +158,7 @@ using div_mod_uint32_remider = uint192_div_rem<uint64_t>;
 
 [[nodiscard]] constexpr div_mod_uint32_remider div_mod(const uint_192 &dividend, const uint32_t divisor) {
     div_mod_uint32_remider result{};
-    uint64_t intermediate_division_result;
+    uint64_t intermediate_division_result{};
     for (uint64_t part_index = dividend.parts.size() - 1; part_index < static_cast<uint64_t>(-1); --part_index) {
         uint64_t upper_part = dividend.parts[part_index] >> UINT32_WIDTH;
         uint64_t lower_part = dividend.parts[part_index] & LOWER_BITMASK;
