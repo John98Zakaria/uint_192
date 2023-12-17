@@ -154,10 +154,10 @@ template <typename T> struct uint192_div_rem {
     T reminder;
 };
 
-using div_mod_uint32_remider = uint192_div_rem<uint64_t>;
+using div_mod_uint64_remider = uint192_div_rem<uint64_t>;
 
-[[nodiscard]] constexpr div_mod_uint32_remider div_mod(const uint_192 &dividend, const uint32_t divisor) {
-    div_mod_uint32_remider result{};
+[[nodiscard]] constexpr div_mod_uint64_remider div_mod(const uint_192 &dividend, const uint32_t divisor) {
+    div_mod_uint64_remider result{};
     uint64_t intermediate_division_result{};
     for (uint64_t part_index = dividend.parts.size() - 1; part_index < static_cast<uint64_t>(-1); --part_index) {
         uint64_t upper_part = dividend.parts[part_index] >> UINT32_WIDTH;
@@ -177,6 +177,14 @@ using div_mod_uint32_remider = uint192_div_rem<uint64_t>;
     }
 
     return result;
+}
+
+constexpr uint_192 operator/(const uint_192 &dividend, const uint32_t divisor) {
+    return div_mod(dividend, divisor).quotient;
+}
+
+constexpr uint64_t operator%(const uint_192 &dividend, const uint32_t divisor) {
+    return div_mod(dividend, divisor).reminder;
 }
 
 } // namespace uint192_lib
