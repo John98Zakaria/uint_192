@@ -2,12 +2,11 @@
 // Created by jn98zk on 26.11.23.
 //
 #include <array>
-#include <cstdint>
 #include <bitset>
+#include <cstdint>
 
 #ifndef MY_UINT192_UINT_192_HPP
 #define MY_UINT192_UINT_192_HPP
-
 
 namespace uint192_lib {
 struct uint_192 {
@@ -31,6 +30,13 @@ struct uint_192 {
         std::bitset<64> upper(this->parts[2]);
 
         return upper.to_string() + mid.to_string() + lower.to_string();
+    }
+
+    constexpr uint64_t operator[](size_t part_index) const {
+        return parts[part_index];
+    }
+    constexpr uint64_t &operator[](size_t part_index) {
+        return parts[part_index];
     }
 };
 
