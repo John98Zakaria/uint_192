@@ -11,14 +11,13 @@ TEST_CASE("Compare subtraction to GMP") {
     auto lhs_GMP = from_uint192(lhs_uint192);
     auto rhs_GMP = from_uint192(rhs_uint192);
     // We implemented only unsigned arithmatic, so instead of skipping the test case we swap the two values
-    if (rhs_GMP > lhs_GMP){
-        std::swap(lhs_uint192,rhs_uint192);
+    if (rhs_GMP > lhs_GMP) {
+        std::swap(lhs_uint192, rhs_uint192);
         lhs_GMP = from_uint192(lhs_uint192);
         rhs_GMP = from_uint192(rhs_uint192);
     }
     CAPTURE(lhs_uint192);
     CAPTURE(rhs_uint192);
-
 
     const auto result_uint192 = lhs_uint192 - rhs_uint192;
     const auto result_GMP = mpz_class(lhs_GMP - rhs_GMP);

@@ -126,7 +126,7 @@ SCENARIO("Subtraction") {
 
         THEN("Subtracting it from {1,0,0} should reduce the result by 1") {
             const auto result = a - uint192_lib::uint_192{1};
-            REQUIRE(result.parts[0] == UINT64_MAX -1Ul);
+            REQUIRE(result.parts[0] == UINT64_MAX - 1Ul);
         }
     }
 
@@ -145,20 +145,19 @@ SCENARIO("Subtraction") {
 
         THEN("Subtracting it from {1,0,0} should reduce the result by 1 in the correct position") {
             const auto result = a - uint192_lib::uint_192{1};
-            REQUIRE(result.parts[0] == UINT64_MAX -1Ul);
+            REQUIRE(result.parts[0] == UINT64_MAX - 1Ul);
             REQUIRE(result.parts[1] == UINT64_MAX);
         }
 
         THEN("Subtracting it from {1,1,0} should reduce the result by 1 in the correct positions") {
-            const auto result = a - uint192_lib::uint_192{1,1};
-            REQUIRE(result.parts[0] == UINT64_MAX -1Ul);
-            REQUIRE(result.parts[1] == UINT64_MAX -1Ul);
+            const auto result = a - uint192_lib::uint_192{1, 1};
+            REQUIRE(result.parts[0] == UINT64_MAX - 1Ul);
+            REQUIRE(result.parts[1] == UINT64_MAX - 1Ul);
         }
         THEN("Subtracting it from {1,UINT64_MAX,0} should be correct") {
-            const auto result = a - uint192_lib::uint_192{1,UINT64_MAX};
-            REQUIRE(result.parts[0] == UINT64_MAX -1Ul);
+            const auto result = a - uint192_lib::uint_192{1, UINT64_MAX};
+            REQUIRE(result.parts[0] == UINT64_MAX - 1Ul);
             REQUIRE(result.parts[1] == 0);
         }
-
     }
 }
