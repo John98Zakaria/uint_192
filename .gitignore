@@ -33,3 +33,12 @@
 
 # Clion cmake folders
 cmake-*
+
+# Node
+presentation/node_modules
+presentation/.DS_Store
+presentation/dist
+presentation/*.local
+presentation/index.html
+presentation/.remote-assets
+presentation/components.d.ts
