@@ -1,12 +1,7 @@
 ---
-theme: dracula
----
+highlighter: shikiji
 
 ---
-transition: slide-left
-layout: cover
----
-
 # Arbitrary-sized unsigned integers
 
 By John Sorial
@@ -21,6 +16,148 @@ layout: default
 *
 
 ---
+
+# Goals
+
+* Implement the basic math operations + - * $\div$
+
+* Implement some bitwise operations >>
+
+* Logical operators = < >
+
+* Learn some C++ quircks
+
+---
+
+<div style="display: flex; align-items: center; justify-content: center;flex-direction: column">
+    <h1>The holy rule</h1>
+    <h4>The operations of the base type must be used</h4>
+</div>
+
+## Forbidden
+
+1. Multiplication is repeated addition.
+2. Division is repeated subtraction.
+3. Manipulate bits one by one.
+
+---
+---
+
+# Class Structure
+
+<div id="cpp_uint_192_struct" class="flex flex-justify-center flex-col flex-content-center flex-items-center">
+
+```c++
+struct uint_192 {
+    std::array<std::uint64_t, 3> parts;
+}
+```
+
+<div class="grid grid-cols-4 grid-rows-3 gap-x-9xl pa-2 mt-2">
+    <div class="flex flex-justify-center">
+        Binary
+    </div>
+    <div class="flex flex-justify-center">
+        00000
+    </div>
+    <div class="flex flex-justify-center">
+        00000
+    </div>
+    <div class="flex flex-justify-center">
+        00000
+    </div>
+    <div class="flex flex-justify-center">
+        Base 10
+    </div>
+    <div class="flex flex-justify-center">
+        0
+    </div>
+    <div class="flex flex-justify-center">
+        0
+    </div>
+    <div class="flex flex-justify-center">
+        0
+    </div>
+    <div class="flex flex-justify-center">
+        Index
+    </div>
+    <div class="flex flex-justify-center">
+        2
+    </div>
+    <div class="flex flex-justify-center">
+        1
+    </div>
+    <div class="flex flex-justify-center">
+        0
+    </div>
+</div>
+</div>
+
+<div class="grid grid-cols-2 grid-rows-1 gap-x-9xl pa-2 mt-2">
+
+<div class="flex flex-justify-center flex-col flex-content-center flex-items-center" >
+
+```c++
+uint_192 ones{1,1,1};
+```
+
+<div class="grid grid-cols-4 grid-rows-4 gap-x-9xl pa-2">
+    <div class="flex flex-justify-center">
+        Binary
+    </div>
+    <div class="flex flex-justify-center">
+        00001
+    </div>
+    <div class="flex flex-justify-center">
+        00001
+    </div>
+    <div class="flex flex-justify-center">
+        00001
+    </div>
+    <div class="flex flex-justify-center">
+        Base10
+    </div>
+    <div class="flex flex-justify-center">
+        1
+    </div>
+    <div class="flex flex-justify-center">
+        1
+    </div>
+    <div class="flex flex-justify-center">
+        1
+    </div>
+    <div class="flex flex-justify-center">
+        Index
+    </div>
+    <div class="flex flex-justify-center">
+        2
+    </div>
+    <div class="flex flex-justify-center">
+        1
+    </div>
+    <div class="flex flex-justify-center">
+        0
+    </div>
+    <div class="flex flex-justify-center">
+        Value
+    </div>
+
+</div>
+</div>
+
+
+
+</div>
+
+<style>
+
+code[class*='language-c++'] {
+    font-size: 1.5em;
+}
+
+</style>
+
+---
 layout: two-cols-header
 ---
 
@@ -30,33 +167,50 @@ layout: two-cols-header
 
 <style>
 .katex-display{
-    display: flex
+    display: flex;
+    padding-left: 50px;
 }
 </style>
 
 ::left::
 
-$$ {1|2|3|4}
+$$
 
 \begin{align*}
 
 R=& (111....)_2 + (111....)_2 \\
-=& \sum_{n=0}^{n-1} 2^n + \sum_{n=0}^{n-1} 2^n \\
+=& \sum_{x=0}^{n-1} 2^x + \sum_{x=0}^{n-1} 2^x \\
 
-=& \: 2*{\sum_{n=0}^{n-1} 2^n} \\
+=& \: 2*{\sum_{x=0}^{n-1} 2^x} \\
 
 =& \: 2*(2^{n} - 1)\\
 
 =& \: 2^{n+1} - 2 \\
 
-=& \: \sum_{n=0}^{n} 2^n - 1 \\
+=& \: \sum_{x=0}^{n} 2^x - 1 \\
 
-=& \: \sum_{n=1}^{n} 2^n \\
+=& \: \sum_{n=1}^{n} 2^x \\
 
 %<& \: 2^{n+1}
 
+=& \: (11...10)_2
+
 \end{align*}
 $$
+
+<v-clicks>
+    <div style="{position: absolute; visibility: hidden;opacity: 0}">
+        <div>This is just to trick the click counter</div>
+    </div>
+</v-clicks>
+
+<div >
+    <div class="absolute left-355px top-170px" v-if="$clicks==1" v-motion-slide-left>
+        n=4
+    </div>
+    <Arrow x1="300" y1="200" x2="450" y2="200" v-if="$clicks ==1" v-motion-slide-left/>
+
+</div>
 
 ::right::
 
@@ -64,77 +218,21 @@ $$
 \begin{align*}
 
 R=& (1111)_2 + (1111)_2 \\
-=& \sum_{n=0}^{3} 2^n + \sum_{n=0}^{3} 2^n \\
+=& \sum_{x=0}^{3} 2^x + \sum_{x=0}^{3} 2^x \\
 
-=& \: 2*{\sum_{n=0}^{3} 2^n} \\
+=& \: 2*{\sum_{x=0}^{3} 2^x} \\
 
 =& \: 2*(2^{4} - 1)\\
 
 =& \: 2^{5} - 2 \\
 
-=& \: \sum_{n=0}^{4} 2^n - 1 \\
+=& \: \sum_{x=0}^{4} 2^x - 1 \\
 
-=& \: \sum_{n=1}^{4} 2^n = 2^{1} + 2^{2} + 2^{3} + 2^{4} \\
+=& \: \sum_{x=1}^{4} 2^x = 2^{1} + 2^{2} + 2^{3} + 2^{4} \\
 
 =& \: (11110)_2
 \end{align*}
 $$
-
-<style>
-h1{}
-</style>
-
----
-
-# Code
-
-Use code snippets and get the highlighting directly, and even types hover![^1]
-
-```ts {all|5|1-6|9|all} twoslash
-// TwoSlash enables TypeScript hover information and errors in markdown code blocks
-// Learn more at https://www.typescriptlang.org/dev/twoslash/
-function getUser(id: number): User {
-    return undefined as any
-}
-
-function saveUser(id: number, user: User) {
-    // ...
-}
-
-// ---cut---
-interface User {
-    id: number
-    firstName: string
-    lastName: string
-    role: string
-// ^?
-}
-
-function updateUser(id: number, update: User) {
-    const user = getUser(id)
-    const newUser = {...user, ...update}
-    saveUser(id, newUser)
-}
-```
-
-<arrow v-click="[3, 4]" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
-
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
-
-<style>
-.footnotes-sep {
-  @apply mt-20 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
-
----
 
 # Components
 
