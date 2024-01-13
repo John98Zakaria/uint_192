@@ -12,6 +12,7 @@
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
     "katex": "^0.16.9",
+    "slidev-addon-animattr": "^1.1.2",
     "slidev-theme-dracula": "^0.2.0"
   },
   "devDependencies": {

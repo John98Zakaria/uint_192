@@ -17,6 +17,9 @@ dependencies:
   katex:
     specifier: ^0.16.9
     version: 0.16.9
+  slidev-addon-animattr:
+    specifier: ^1.1.2
+    version: 1.1.2
   slidev-theme-dracula:
     specifier: ^0.2.0
     version: 0.2.0
@@ -1103,6 +1106,11 @@ packages:
       defer-to-connect: 2.0.1
     dev: false
 
+  /@trysound/sax@0.2.0:
+    resolution: { integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA== }
+    engines: { node: '>=10.13.0' }
+    dev: false
+
   /@types/d3-scale-chromatic@3.0.3:
     resolution: { integrity: sha512-laXM4+1o5ImZv3RpFAsTRn3TEkzqkytiOY0Dz0sq5cnd1dtNlk6sHLon4OvqaiJb28T0S/TdsBI3Sjsy+keJrw== }
     dev: false
@@ -1761,6 +1769,10 @@ packages:
     engines: { node: '>=8' }
     dev: false
 
+  /boolbase@1.0.0:
+    resolution: { integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww== }
+    dev: false
+
   /bplist-parser@0.2.0:
     resolution: { integrity: sha512-z0M+byMThzQmD9NILRniCUXYsYpjwnlO8N5uCFaCqIOpqRsJCrQL9NK3JsD67CN5a08nF5oIL2bD6loTdHOuKw== }
     engines: { node: '>= 5.10.0' }
@@ -1967,6 +1979,10 @@ packages:
     engines: { node: '>= 12' }
     dev: false
 
+  /commondir@1.0.1:
+    resolution: { integrity: sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg== }
+    dev: false
+
   /connect@3.7.0:
     resolution: { integrity: sha512-ZqRXc+tZukToSNmh5C2iWMSoV3X1YUcPbqEM4DkEG5tNQXrQUZCNVGGv3IuicnkMtPfGf3Xtp8WCXs295iQ1pQ== }
     engines: { node: '>= 0.10.0' }
@@ -2009,6 +2025,24 @@ packages:
       which: 2.0.2
     dev: false
 
+  /css-select@5.1.0:
+    resolution: { integrity: sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg== }
+    dependencies:
+      boolbase: 1.0.0
+      css-what: 6.1.0
+      domhandler: 5.0.3
+      domutils: 3.1.0
+      nth-check: 2.1.1
+    dev: false
+
+  /css-tree@2.2.1:
+    resolution: { integrity: sha512-OA0mILzGc1kCOCSJerOeqDxDQ4HOh+G8NbOJFOTgOCzpw7fCBubk0fEyxp8AgOL/jvLgYA/uV0cMbe43ElF1JA== }
+    engines: { node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0' }
+    dependencies:
+      mdn-data: 2.0.28
+      source-map-js: 1.0.2
+    dev: false
+
   /css-tree@2.3.1:
     resolution: { integrity: sha512-6Fv1DV/TYw//QF5IzQdqsNDjx/wc8TrMBZsqjL9eW01tWb7R7k/mq+/VXfJCl7SoD5emsJop9cOByJZfs8hYIw== }
     engines: { node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0 }
@@ -2017,10 +2051,22 @@ packages:
       source-map-js: 1.0.2
     dev: false
 
+  /css-what@6.1.0:
+    resolution: { integrity: sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw== }
+    engines: { node: '>= 6' }
+    dev: false
+
   /cssesc@3.0.0:
     resolution: { integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg== }
     engines: { node: '>=4' }
     hasBin: true
+    dev: false
+
+  /csso@5.0.5:
+    resolution: { integrity: sha512-0LrrStPOdJj+SPCCrGhzryycLjwcgUSHBtxNA8aIDxf0GLsRh1cKYhB00Gd1lDOS4yGH69+SNn13+TWbVHETFQ== }
+    engines: { node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0' }
+    dependencies:
+      css-tree: 2.2.1
     dev: false
 
   /csstype@3.1.3:
@@ -2704,6 +2750,23 @@ packages:
       - supports-color
     dev: false
 
+  /find-cache-dir@3.3.2:
+    resolution: { integrity: sha512-wXZV5emFEjrridIgED11OoUKLxiYjAcqot/NJdAkOhlJ+vGzwhOAfcG5OX1jP+S0PcjEn8bdMJv+g2jwQ3Onig== }
+    engines: { node: '>=8' }
+    dependencies:
+      commondir: 1.0.1
+      make-dir: 3.1.0
+      pkg-dir: 4.2.0
+    dev: false
+
+  /find-up@4.1.0:
+    resolution: { integrity: sha512-PpOwAdQ/YlXQ2vj8a3h8IipDuYRi3wceVQQGYWxNINccq40Anw7BlsEXCMbt1Zt+OLA6Fq9suIpIWD0OsnISlw== }
+    engines: { node: '>=8' }
+    dependencies:
+      locate-path: 5.0.0
+      path-exists: 4.0.0
+    dev: false
+
   /find-up@5.0.0:
     resolution: { integrity: sha512-78/PXT1wlLLDgTzDs7sjq9hzz0vXD+zn+7wypEe4fXQxCmdmqfGsEPQxmiCSQI3ajFV91bVSsvNtrJRiW6nGng== }
     engines: { node: '>=10' }
@@ -3281,6 +3344,13 @@ packages:
       - supports-color
     dev: false
 
+  /locate-path@5.0.0:
+    resolution: { integrity: sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g== }
+    engines: { node: '>=8' }
+    dependencies:
+      p-locate: 4.1.0
+    dev: false
+
   /locate-path@6.0.0:
     resolution: { integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw== }
     engines: { node: '>=10' }
@@ -3326,6 +3396,13 @@ packages:
     engines: { node: '>=12' }
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.15
+    dev: false
+
+  /make-dir@3.1.0:
+    resolution: { integrity: sha512-g3FeP20LNwhALb/6Cz6Dd4F2ngze0jz7tbzrD2wAV+o9FeNHe4rL+yK2md0J/fiSf1sa1ADhXqi5+oVwOM/eGw== }
+    engines: { node: '>=8' }
+    dependencies:
+      semver: 6.3.1
     dev: false
 
   /markdown-it-footnote@4.0.0:
@@ -3400,6 +3477,10 @@ packages:
     resolution: { integrity: sha512-V4Zn/ncyN1QNSqSBxTrMOLpjr+IKdHl2v3KVLoWmDPscP4r9GcCi71gjgvUV1SFSKh92AjAG4peFuBl2/YgCJg== }
     dependencies:
       '@types/mdast': 3.0.15
+    dev: false
+
+  /mdn-data@2.0.28:
+    resolution: { integrity: sha512-aylIc7Z9y4yzHYAJNuESG3hfhC+0Ibp/MAMiaOZgNv4pmEdFyfZhhhny4MNiAfWdBQ1RQ2mfDWmM1x8SvGyp8g== }
     dev: false
 
   /mdn-data@2.0.30:
@@ -3785,6 +3866,12 @@ packages:
       path-key: 4.0.0
     dev: false
 
+  /nth-check@2.1.1:
+    resolution: { integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w== }
+    dependencies:
+      boolbase: 1.0.0
+    dev: false
+
   /ofetch@1.3.3:
     resolution: { integrity: sha512-s1ZCMmQWXy4b5K/TW9i/DtiN8Ku+xCiHcjQ6/J/nDdssirrQNOoB165Zu8EqLMA2lln1JUth9a0aW9Ap2ctrUg== }
     dependencies:
@@ -3839,6 +3926,13 @@ packages:
     engines: { node: '>=12.20' }
     dev: false
 
+  /p-limit@2.3.0:
+    resolution: { integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w== }
+    engines: { node: '>=6' }
+    dependencies:
+      p-try: 2.2.0
+    dev: false
+
   /p-limit@3.1.0:
     resolution: { integrity: sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ== }
     engines: { node: '>=10' }
@@ -3846,11 +3940,23 @@ packages:
       yocto-queue: 0.1.0
     dev: false
 
+  /p-locate@4.1.0:
+    resolution: { integrity: sha512-R79ZZ/0wAxKGu3oYMlz8jy/kbhsNrS7SKZ7PxEHBgJ5+F2mtFW2fK2cOtBh1cHYkQsbzFV7I+EoRKe6Yt0oK7A== }
+    engines: { node: '>=8' }
+    dependencies:
+      p-limit: 2.3.0
+    dev: false
+
   /p-locate@5.0.0:
     resolution: { integrity: sha512-LaNjtRWUBY++zB5nE/NwcaoMylSPk+S+ZHNB1TzdbMJMny6dynpAGt7X/tl/QYq3TIeE6nxHppbo2LGymrG5Pw== }
     engines: { node: '>=10' }
     dependencies:
       p-limit: 3.1.0
+    dev: false
+
+  /p-try@2.2.0:
+    resolution: { integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ== }
+    engines: { node: '>=6' }
     dev: false
 
   /pako@1.0.11:
@@ -3912,6 +4018,13 @@ packages:
   /picomatch@2.3.1:
     resolution: { integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA== }
     engines: { node: '>=8.6' }
+    dev: false
+
+  /pkg-dir@4.2.0:
+    resolution: { integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ== }
+    engines: { node: '>=8' }
+    dependencies:
+      find-up: 4.1.0
     dev: false
 
   /pkg-types@1.0.3:
@@ -4232,6 +4345,14 @@ packages:
     dev: false
     optional: true
 
+  /slidev-addon-animattr@1.1.2:
+    resolution: { integrity: sha512-ZJVhmkjxvOgrpNQCtPOC6nLYTWjZB/arnnH2AMsspg1u2zEP3sv6sJE4LJcAWGvMCX1CnLF9j2/5EA/GWSKrRw== }
+    engines: { node: '>=14.0.0', slidev: '>=0.32.1' }
+    dependencies:
+      find-cache-dir: 3.3.2
+      svgo: 3.1.0
+    dev: false
+
   /slidev-theme-dracula@0.2.0:
     resolution: { integrity: sha512-ndMD27+gUNYt9aXrb4/0vSBHKP007mpD2eCJppzhqXDG1DmN0Q6I6iFz+QvIjOPDKzzPjoYZbsWp6lPLJjgs9g== }
     engines: { node: '>=14.0.0', slidev: '>=0.19.3' }
@@ -4326,6 +4447,20 @@ packages:
 
   /svg-tags@1.0.0:
     resolution: { integrity: sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA== }
+    dev: false
+
+  /svgo@3.1.0:
+    resolution: { integrity: sha512-R5SnNA89w1dYgNv570591F66v34b3eQShpIBcQtZtM5trJwm1VvxbIoMpRYY3ybTAutcKTLEmTsdnaknOHbiQA== }
+    engines: { node: '>=14.0.0' }
+    hasBin: true
+    dependencies:
+      '@trysound/sax': 0.2.0
+      commander: 7.2.0
+      css-select: 5.1.0
+      css-tree: 2.3.1
+      css-what: 6.1.0
+      csso: 5.0.5
+      picocolors: 1.0.0
     dev: false
 
   /tar@6.2.0:

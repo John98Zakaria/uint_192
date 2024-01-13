@@ -9,11 +9,31 @@ By John Sorial
 ---
 layout: default
 ---
-
 # Motivation
 
-* Curiosity
-*
+<div class="grid grid-cols-2 gap-5">
+<div class="flex flex-justify-center flex-col flex-items-center flex-content-center h-100">
+
+
+<img src="img.png">
+</div>
+<div>
+
+<div class="flex flex-justify-center flex-col flex-content-center h-100">
+<div class="-translate-y-10">
+Implementieren Sie nun folgende Funktionen:
+</div>
+
+1. `printBigUInt()`: gibt die ganze Zahl zur Basis 10 auf der Kommandozeile aus.
+2. `addBigUInt()`: summiert zwei BigUInts
+3. `multiplyBigUInt()`: Multipliziert zwei BigUInts
+
+</div>
+</div>
+
+</div>
+
+
 
 ---
 
@@ -41,195 +61,17 @@ layout: default
 3. Manipulate bits one by one.
 
 ---
+src: ./slides/class-structure.md
 ---
-
-# Class Structure
-
-<div id="cpp_uint_192_struct" class="flex flex-justify-center flex-col flex-content-center flex-items-center">
-
-```c++
-struct uint_192 {
-    std::array<std::uint64_t, 3> parts;
-}
-```
-
-<div v-click class="grid grid-cols-4 grid-rows-3 gap-x-9xl pa-2 mt-2">
-    <div class="flex flex-justify-center">
-        Binary
-    </div>
-    <div class="flex flex-justify-center">
-        00000
-    </div>
-    <div class="flex flex-justify-center">
-        00000
-    </div>
-    <div class="flex flex-justify-center">
-        00000
-    </div>
-    <div class="flex flex-justify-center">
-        Base 10
-    </div>
-    <div class="flex flex-justify-center">
-        0
-    </div>
-    <div class="flex flex-justify-center">
-        0
-    </div>
-    <div class="flex flex-justify-center">
-        0
-    </div>
-    <div class="flex flex-justify-center">
-        Index
-    </div>
-    <div class="flex flex-justify-center">
-        2
-    </div>
-    <div class="flex flex-justify-center">
-        1
-    </div>
-    <div class="flex flex-justify-center">
-        0
-    </div>
-</div>
-</div>
-
-<div class="grid grid-cols-2 grid-rows-1 gap-x-9xl pa-2 mt-2">
-
-<div v-click class="flex flex-justify-center flex-col flex-content-center flex-items-center" >
-
-```c++
-uint_192 ones{1,1,1};
-```
-
-<div class="grid grid-cols-4 grid-rows-4 gap-x-9xl pa-2">
-    <div class="flex flex-justify-center">
-        Binary
-    </div>
-    <div class="flex flex-justify-center">
-        00001
-    </div>
-    <div class="flex flex-justify-center">
-        00001
-    </div>
-    <div class="flex flex-justify-center">
-        00001
-    </div>
-    <div class="flex flex-justify-center">
-        Base10
-    </div>
-    <div class="flex flex-justify-center">
-        1
-    </div>
-    <div class="flex flex-justify-center">
-        1
-    </div>
-    <div class="flex flex-justify-center">
-        1
-    </div>
-    <div class="flex flex-justify-center">
-        Index
-    </div>
-    <div class="flex flex-justify-center">
-        2
-    </div>
-    <div class="flex flex-justify-center">
-        1
-    </div>
-    <div class="flex flex-justify-center">
-        0
-    </div>
-    <div class="flex flex-justify-center">
-        Value
-    </div>
-    <div class="flex flex-justify-center max-h-2em col-span-3">
-
-<div class="-translate-y-4 translate-x-1">
-
-$2^{128}+2^{64}+2^{0}$
-
-</div>
-
-</div>
-</div>
-</div>
-
-<div v-click class="flex flex-justify-center flex-col flex-content-center flex-items-center" >
-
-```c++
-uint_192 ones{1,1,1};
-```
-
-<div class="grid grid-cols-4 grid-rows-4 gap-x-9xl pa-2">
-    <div class="flex flex-justify-center">
-        Binary
-    </div>
-    <div class="flex flex-justify-center">
-        00001
-    </div>
-    <div class="flex flex-justify-center">
-        00001
-    </div>
-    <div class="flex flex-justify-center">
-        00001
-    </div>
-    <div class="flex flex-justify-center">
-        Base10
-    </div>
-    <div class="flex flex-justify-center">
-        1
-    </div>
-    <div class="flex flex-justify-center">
-        1
-    </div>
-    <div class="flex flex-justify-center">
-        1
-    </div>
-    <div class="flex flex-justify-center">
-        Index
-    </div>
-    <div class="flex flex-justify-center">
-        2
-    </div>
-    <div class="flex flex-justify-center">
-        1
-    </div>
-    <div class="flex flex-justify-center">
-        0
-    </div>
-    <div class="flex flex-justify-center">
-        Value
-    </div>
-    <div class="flex flex-justify-center max-h-2em col-span-3">
-
-<div class="-translate-y-4 translate-x-1">
-
-$2^{128}+2^{64}+2^{0}$
-
-</div>
-
-</div>
-</div>
-</div>
-
-
-
-</div>
-
-<style>
-
-code[class*='language-c++'] {
-    font-size: 1.5em;
-}
-
-</style>
 
 ---
 layout: two-cols-header
 ---
 
-<!-- Removes spacing caused by .katex-display -->
 
 # Proof: Maximal 1 bit needs to be carried over
+
+<!-- Removes spacing caused by .katex-display -->
 
 <style>
 .katex-display{
@@ -255,7 +97,7 @@ R=& (111....)_2 + (111....)_2 \\
 
 =& \: \sum_{x=0}^{n} 2^x - 1 \\
 
-=& \: \sum_{n=1}^{n} 2^x \\
+=& \: \sum_{x=1}^{n} 2^x \\
 
 %<& \: 2^{n+1}
 
@@ -295,58 +137,13 @@ R=& (1111)_2 + (1111)_2 \\
 \end{align*}
 $$
 
-# Components
-
-<div grid="~ cols-2 gap-4">
-<div>
-
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your
-custom components is also super easy.
-
-```html
-
-<Counter :count="10"/>
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-
-<Tweet id="1390115482657726468"/>
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
----
-class: px-20
 ---
 
 # Themes
 
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for
+Slidev comes with powerful theming support. Themes can provide <styles, layouts, components, or even configurations for
 tools. Switching between themes by just **one edit** in your frontmatter:
-
+>
 <div grid="~ cols-2 gap-2" m="t-2">
 
 ```yaml
