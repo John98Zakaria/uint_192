@@ -1,6 +1,29 @@
-from copy import deepcopy
+import itertools
+import math
 
 from manim import *
+
+from multiplication_repr import (
+    MultiplicationRepresentation,
+    TexCharAssociation,
+    NumberExponentTex,
+)
+
+
+def number_to_base_10_parts(number: int) -> (str, list[str]):
+    if number == 0:
+        return "0"
+    n_digits = math.ceil(math.log10(number))
+    digits: list[str] = []
+    for i in range(n_digits):
+        digit = number % 10
+        number //= 10
+        if digit == 0:
+            continue
+
+        digits.append(rf"{digit} \cdot 10^{{{i}}}")
+
+    return f'${"+".join(digits[::-1])}$', digits[::-1]
 
 
 class CreateCircle(Scene):
@@ -18,79 +41,243 @@ class CreateCircle(Scene):
         result_base10_lower_bits = int(result_bin_lower_bits, 2)
         result_base10_upper_bits = int(result_bin_upper_bits, 2)
 
+        base_10_group, bin_group = self.scene_1(
+            num1, num2, result, result_base10_lower_bits, result_base10_upper_bits
+        )
+
+        # Explain Base 10
+
+        self.scene_2(base_10_group, num1, num2)
+
+    def scene_1(
+        self, num1, num2, result, result_base10_lower_bits, result_base10_upper_bits
+    ):
         base_10_parts_text = f"${result_base10_upper_bits}+{result_base10_lower_bits}$"
-
         base10_parts_text = Tex(base_10_parts_text)
-
         # BIN SIDE
         num1_tex = f"$({bin(num1)[2:]})_{{2}}$"
         num2_tex = f"$({bin(num2)[2:]})_{{2}}$"
         result_tex = f"$({bin(result)[2:]})_{{2}}$"
-
-        upper_bin_text = Tex(num1_tex)
-        lower_bin_text = Tex(num2_tex)
-        result_bin_text = Tex(result_tex)
-        multiplication_bin_dot = Tex(r"$\times$")
-        lower_bin_text.next_to(upper_bin_text, DOWN)
-        multiplication_bin_dot.next_to(lower_bin_text, LEFT)
-        left_point = deepcopy(multiplication_bin_dot.get_left().copy())
-        right_point = deepcopy(lower_bin_text.get_right().copy())
-        line = Line(left_point, right_point)
-        line.set_y(-1.1, DOWN)
-
-        bin_group = VGroup(upper_bin_text, lower_bin_text, multiplication_bin_dot, line)
+        bin_group = MultiplicationRepresentation(
+            num1_tex,
+            num2_tex,
+            result_tex,
+        )
         bin_group.set_x(-5, LEFT)
         self.play(Create(bin_group))
-
         # BASE_10
-
-        upper_base10_text = Tex(num1)
-        lower_base10_text = Tex(num2)
-        result_base10_text = Tex(result)
-        lower_base10_text.next_to(upper_base10_text, DOWN)
-        multiplication_base10_dot = Tex(r"$\times$")
-
-        multiplication_base10_dot.next_to(lower_base10_text, LEFT)
-        left_point = deepcopy(multiplication_base10_dot.get_left().copy())
-        right_point = deepcopy(lower_base10_text.get_right().copy())
-        line = Line(left_point, right_point)
-        line.set_y(-1.1, DOWN)
-
-        base_10_group = VGroup(upper_base10_text, lower_base10_text, multiplication_base10_dot, line)
+        base_10_group = MultiplicationRepresentation(
+            num1,
+            num2,
+            result,
+        )
         base_10_group.set_x(5, RIGHT)
         self.play(TransformFromCopy(bin_group, base_10_group))
-
         self.play(Wait(2))
-
         # Add Result
-
-        result_bin_text.next_to(lower_bin_text, 1.2 * DOWN)
-        bin_group.add(result_bin_text)
-        result_base10_text.next_to(base_10_group, 1.2 * DOWN)
-        base_10_group.add(result_base10_text)
-
-        self.play(Create(result_bin_text), Create(result_base10_text))
-
+        base_10_group.add_result_to_group()
+        bin_group.add_result_to_group()
+        self.play(Create(bin_group.result_tex), Create(base_10_group.result_tex))
         self.wait(2)
-
-        # Show Overflow of numbers
+        # # Show Overflow of numbers
         size_of_upper = len(str(result_base10_upper_bits))
         base10_parts_text[0][0:size_of_upper].set_color(RED)
-        base10_parts_text.set_y(result_base10_text.get_y())
-        base10_parts_text.set_x(result_base10_text.get_x())
-
-        self.play(FadeToColor(result_bin_text[0][1:9], color=RED),
-                  Transform(result_base10_text, base10_parts_text))
-
+        base10_parts_text.set_y(base_10_group.result_tex.get_y())
+        base10_parts_text.set_x(base_10_group.result_tex.get_x())
+        self.play(
+            FadeToColor(bin_group.result_tex[0][1:9], color=RED),
+            Transform(base_10_group.result_tex, base10_parts_text),
+        )
         self.wait(2)
 
-        # Translate Base10
+        self.play(
+            base_10_group.animate.move_to(np.array([-2, 2, 0])),
+            bin_group.animate.fade(1),
+        )
 
-        self.play(base_10_group.animate.move_to(np.array([-4, 2, 0])), bin_group.animate.fade(1))
+        return base_10_group, bin_group
 
+    def scene_2(self, base_10_group, num1, num2):
+        num1_latex, num1_parts = number_to_base_10_parts(num1)
+        num2_latex, num2_parts = number_to_base_10_parts(num2)
+        base_10_spilt = MultiplicationRepresentation(num1_latex, num2_latex, "")
+
+        base_10_spilt.set_x(1.75, RIGHT)
+        base_10_spilt.set_y(3, UP)
+
+        self.play(Transform(base_10_group, base_10_spilt))
+
+        upper_base_10_split_left_num = TexCharAssociation(
+            base_10_spilt.upper_tex[0][0], num1_parts[0][0]
+        )
+        upper_base_10_split_left_num_pow = TexCharAssociation(
+            base_10_spilt.upper_tex[0][4], num1_parts[0][-2]
+        )
+        upper_base_10_split_right_num = TexCharAssociation(
+            base_10_spilt.upper_tex[0][6], num1_parts[1][0]
+        )
+        upper_base_10_split_right_num_pow = TexCharAssociation(
+            base_10_spilt.upper_tex[0][10], num1_parts[1][-2]
+        )
+        lower_base_10_split_left_num = TexCharAssociation(
+            base_10_spilt.lower_tex[0][0], num2_parts[0][0]
+        )
+        lower_base_10_split_left_num_pow = TexCharAssociation(
+            base_10_spilt.lower_tex[0][4], num2_parts[0][-2]
+        )
+        lower_base_10_split_right_num = TexCharAssociation(
+            base_10_spilt.lower_tex[0][6], num2_parts[1][0]
+        )
+        lower_base_10_split_right_num_pow = TexCharAssociation(
+            base_10_spilt.lower_tex[0][10], num2_parts[1][-2]
+        )
+        self.play(
+            FadeToColor(upper_base_10_split_left_num.latex_char, color=BLUE),
+            FadeToColor(upper_base_10_split_left_num_pow.latex_char, color=BLUE),
+            FadeToColor(upper_base_10_split_right_num.latex_char, color=YELLOW),
+            FadeToColor(upper_base_10_split_right_num_pow.latex_char, color=YELLOW),
+            FadeToColor(lower_base_10_split_left_num.latex_char, color=GREEN),
+            FadeToColor(lower_base_10_split_left_num_pow.latex_char, color=GREEN),
+            FadeToColor(lower_base_10_split_right_num.latex_char, color=RED),
+            FadeToColor(lower_base_10_split_right_num_pow.latex_char, color=RED),
+        )
+        # Multiplying out
+        top_split_nums = [upper_base_10_split_left_num, upper_base_10_split_right_num]
+        top_split_pows = [
+            upper_base_10_split_left_num_pow,
+            upper_base_10_split_right_num_pow,
+        ]
+        lower_split_nums = [lower_base_10_split_left_num, lower_base_10_split_right_num]
+        lower_split_pows = [
+            lower_base_10_split_left_num_pow,
+            lower_base_10_split_right_num_pow,
+        ]
+        multiplication_split_number: list[
+            (TexCharAssociation, TexCharAssociation)
+        ] = list(itertools.product(top_split_nums, lower_split_nums))
+        multiplication_split_pows: list[
+            (TexCharAssociation, TexCharAssociation)
+        ] = list(itertools.product(top_split_pows, lower_split_pows))
+        base_10_spilt.get_y()
+        result_rows, result_with_plus = self.multiply_by_parts(
+            multiplication_split_number, multiplication_split_pows, base_10_spilt
+        )
         self.wait(2)
+        base_10_exponent_representations = self.evaluate_base_10_result(result_rows)
+        self.write_out_exponent_results(base_10_exponent_representations)
+
+    def multiply_by_parts(
+        self, multiplication_split_number, multiplication_split_pows, top_element
+    ):
+        result_rows: list[Tex] = []
+        result_with_plus: list[VGroup] = []
+        current_top = top_element
+        for index, (
+            (number_left, number_right),
+            (exponent_left, exponent_right),
+        ) in enumerate(
+            zip(
+                multiplication_split_number,
+                multiplication_split_pows,
+            )
+        ):
+            number_left: TexCharAssociation
+            number_right: TexCharAssociation
+            exponent_left: TexCharAssociation
+            exponent_right: TexCharAssociation
+
+            text = rf"${number_left.char} \cdot {number_right.char} \cdot 10^{{{exponent_left.char} + {exponent_right.char}}}$"
+            print(text)
+            base_result = Tex(text)
+
+            number_left_res = base_result[0][0].set_color(
+                number_left.latex_char.get_color()
+            )
+            number_right_res = base_result[0][2].set_color(
+                number_right.latex_char.get_color()
+            )
+            exponent_left_res = base_result[0][6].set_color(
+                exponent_left.latex_char.get_color()
+            )
+            exponent_right_res = base_result[0][8].set_color(
+                exponent_right.latex_char.get_color()
+            )
+
+            plus_sign = Tex("+")
+            if len(result_rows) == 0:
+                plus_sign = Tex("")
+
+            base_result.next_to(current_top, DOWN)
+
+            if len(result_rows) != 0:
+                base_result.next_to(result_rows[-1], DOWN)
+                plus_sign.next_to(result_rows[-1], np.array([-1, -1.35, 0]))
+
+            result_rows.append(base_result)
+            result_with_plus.append(VGroup(base_result, plus_sign))
+
+            current_top = base_result
+
+            self.play(
+                Wiggle(number_left.latex_char),
+                Wiggle(number_right.latex_char),
+                Wiggle(exponent_left.latex_char),
+                Wiggle(exponent_right.latex_char),
+            )
+            self.play(
+                TransformFromCopy(number_left.latex_char, number_left_res),
+                TransformFromCopy(number_right.latex_char, number_right_res),
+                TransformFromCopy(exponent_left.latex_char, exponent_left_res),
+                TransformFromCopy(exponent_right.latex_char, exponent_right_res),
+                Create(base_result[0][1]),
+                Create(base_result[0][3:6]),
+                Create(base_result[0][7]),
+                Create(plus_sign),
+            )
+
+        return result_rows, result_with_plus
+
+    def evaluate_base_10_result(
+        self, result_rows: list[Tex]
+    ) -> list[NumberExponentTex]:
+        new_results: list[NumberExponentTex] = []
+        for result in result_rows:
+            result_tex = result.tex_string
+            left_number = int(result_tex[1])
+            right_number = int(result_tex[9])
+            left_number_exp = int(result_tex[21])
+            right_number_exp = int(result_tex[25])
+
+            base_result = left_number * right_number
+            exponent_result = left_number_exp + right_number_exp
+            new_result = Tex(rf"${base_result} \cdot 10^{{{exponent_result}}}$")
+
+            new_result.set_x(result.get_x())
+            new_result.set_y(result.get_y())
+
+            self.play(
+                Transform(result, new_result),
+            )
+            new_results.append(NumberExponentTex(base_result, exponent_result, result))
+
+        return new_results
+
+    def write_out_exponent_results(
+        self, exponenet_represenataions: list[NumberExponentTex]
+    ):
+        for exponenet_repr in exponenet_represenataions:
+            print(exponenet_repr)
+            base_10_value = Tex(
+                f"{exponenet_repr.number * (10 ** exponenet_repr.exponent)}"
+            )
+            base_10_value.set_x(exponenet_repr.latex_component.get_x())
+            base_10_value.set_y(exponenet_repr.latex_component.get_y())
+
+            self.play(Transform(exponenet_repr.latex_component, base_10_value))
+
+            exponenet_repr.latex_component = base_10_value
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     scene = CreateCircle()
     scene.construct()
