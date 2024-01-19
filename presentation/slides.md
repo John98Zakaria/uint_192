@@ -1,6 +1,7 @@
 ---
 highlighter: shikiji
-
+addons:
+  - slidev-addon-animattr
 ---
 # Arbitrary-sized unsigned integers
 
@@ -33,8 +34,6 @@ Implementieren Sie nun folgende Funktionen:
 
 </div>
 
-
-
 ---
 
 # Goals
@@ -45,7 +44,7 @@ Implementieren Sie nun folgende Funktionen:
 
 * Logical operators = < >
 
-* Learn some C++ quircks
+* Learn some C++ quirks
 
 ---
 
@@ -65,6 +64,241 @@ src: ./slides/class-structure.md
 ---
 
 ---
+layout: section
+---
+
+# Addition +
+
+---
+layout: default
+---
+
+# Addition +
+
+The naive version
+
+
+
+<div class="relative grid grid-cols-5 content-start place-items-stretch right-3">
+
+
+<div class="col-span-3 h-40vh flex flex-content-center flex-items-center">
+
+```cpp {all|2|4-6|8|all}{lines:true}
+uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) {
+    uint_192 result{};
+    
+    for (uint64_t i = 0; i < lhs.parts.size(); ++i) {
+        result.parts[i] += lhs.parts[i] + rhs.parts[i];
+    }
+    
+    return result;
+}
+```
+
+</div>
+
+<div class="grid grid-rows-3">
+
+<div>
+<v-clicks>
+
+```cpp {1|1-2|all} 
+uint_192 a{0,0,0} // 0;
+uint_192 b{0,0,0}; // 0;
+auto c = a + b; 
+// {0,0,0}
+// 0
+```
+
+```cpp
+uint_192 a{1,2,0} // 55340232221128654848;
+uint_192 b{1,0,0}; // 1
+auto c = a + b; 
+// {2,2,0}
+// 55340232221128654849
+```
+
+<div>
+
+```cpp
+uint_192 a{UINT64_MAX,0,0} // 18446744073709551615;
+uint_192 b{1,0,0}; // 1
+auto c = a + b; 
+// {0,0,0}
+// 0
+```
+
+</div>
+
+
+</v-clicks>
+
+</div>
+
+
+
+
+</div>
+
+</div>
+
+
+
+---
+
+<v-clicks>
+```cpp
+uint_192 a{1,2,0} // 55340232221128654848;
+uint_192 b{1,0,0}; // 1
+auto c = a + b; 
+// {2,2,0}
+// 55340232221128654849
+```
+
+<div ref="data">
+
+```cpp
+uint_192 a{UINT64_MAX,0,0} // 18446744073709551615;
+uint_192 b{1,0,0}; // 1
+auto c = a + b; 
+// {0,0,0}
+// 0
+```
+
+</div>
+
+</v-clicks>
+
+{{a}}
+{{b}}
+
+<script setup lang="ts">
+
+import { watch ,ref,Ref } from 'vue';
+
+
+const a: Ref<number> = $clicks;
+const b = "Ads";
+const data:Ref<HTMLElement> = ref(null);
+
+watch(a, (newNumber,oldnumber) => {
+  if (newNumber==2){
+    alert(data.value.innerText)
+data.value.innerText= "as"
+
+  }
+})
+</script>
+
+
+---
+
+# Addition +
+
+The Problem
+
+Assume we have 8 bits unsigned numbers (range 0-255)
+
+<div class="flex gap-x-12">
+
+$a=230$
+
+$b=180$
+
+</div>
+
+<div class="flex gap-x-1">
+
+$a + b=$
+
+<div v-click>
+
+<div v-if="$clicks==1" class="text-red-400">
+
+$360$
+
+</div>
+
+</div>
+
+<div v-click>
+
+<div v-if="$clicks==2" v-motion-slide-left>
+
+$255+155$
+
+</div>
+
+<div v-if="$clicks==2" v-motion-fade class="relative left-40 bottom-10.5">
+
+$(11111111)_{2} + (10011011)_{2}$
+
+</div>
+
+<div v-if="$clicks==2" v-motion-fade class="relative left-120 bottom-20.5">
+
+$(11111111)_{2} + (10011011)_{2}$
+
+</div>
+
+</div>
+</div>
+
+
+
+
+---
+layout: default
+---
+
+# Addition +
+
+<div class="flex flex-justify-center flex-items-center flex-col flex h-90">
+
+## How do we determine the carry?
+
+</div>
+
+
+---
+
+# Addition + : How do we determine the carry?
+
+---
+
+<div class="grid grid-cols-4">
+
+<div class="col-span-3">
+
+```cpp {all|2-3|5|3,6|7|8|all}{lines:true}
+constexpr uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) noexcept {
+    uint_192 result{};
+    uint64_t carry{0};
+
+    for (uint64_t i = 0; i < lhs.parts.size(); ++i) {
+        result.parts[i] += carry_bit;
+        result.parts[i] += lhs.parts[i] + rhs.parts[i];
+        carry_bit = result.parts[i] < lhs.parts[i];
+    }
+    return result;
+}
+```
+
+</div>
+
+<div class="flex flex-col flex-content-center flex-justify-center">
+
+2. Is carry just a boolean?
+
+</div>
+
+</div>
+
+
+
+
+---
 layout: two-cols-header
 ---
 
@@ -82,7 +316,7 @@ layout: two-cols-header
 
 ::left::
 
-$$
+$$ {1|3|all}
 
 \begin{align*}
 
@@ -185,43 +419,6 @@ Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
 </div>
 ```
 
-<div class="w-60 relative mt-6">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
-
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
 <!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
 <script setup lang="ts">
 const final = {
@@ -235,7 +432,9 @@ const final = {
     stiffness: 20,
     mass: 2
   }
-}
+};
+
+const a = "5+5";
 </script>
 
 <div
