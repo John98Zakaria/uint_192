@@ -26,10 +26,12 @@ def number_to_base_10_parts(number: int) -> (str, list[str]):
     return f'${"+".join(digits[::-1])}$', digits[::-1]
 
 
+config.background_color = "#121212"
+
+
 class CreateCircle(Scene):
     def construct(self):
         # Start
-
         num1 = 230
         num2 = 180
         result = num1 * num2

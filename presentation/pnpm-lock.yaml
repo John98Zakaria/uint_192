@@ -6,14 +6,20 @@ settings:
 
 dependencies:
   '@slidev/cli':
-    specifier: ^0.46.2
-    version: 0.46.2(@types/markdown-it@13.0.7)(postcss@8.4.33)(typescript@5.3.3)
+    specifier: ^0.46.3
+    version: 0.46.3(@types/markdown-it@13.0.7)(postcss@8.4.33)(typescript@5.3.3)
   '@slidev/theme-default':
     specifier: latest
     version: 0.21.2
   '@slidev/theme-seriph':
     specifier: latest
     version: 0.21.3
+  '@vueuse/components':
+    specifier: ^10.7.2
+    version: 10.7.2(vue@3.4.15)
+  '@vueuse/core':
+    specifier: ^10.7.2
+    version: 10.7.2(vue@3.4.15)
   katex:
     specifier: ^0.16.9
     version: 0.16.9
@@ -23,8 +29,14 @@ dependencies:
   slidev-theme-dracula:
     specifier: ^0.2.0
     version: 0.2.0
+  vue:
+    specifier: ^3.4.15
+    version: 3.4.15(typescript@5.3.3)
 
 devDependencies:
+  '@iconify/json':
+    specifier: ^2.2.171
+    version: 2.2.171
   '@types/katex':
     specifier: ^0.16.7
     version: 0.16.7
@@ -591,8 +603,8 @@ packages:
     dev: false
     optional: true
 
-  /@iconify-json/carbon@1.1.27:
-    resolution: { integrity: sha512-tJVXv9+D9cjU5HcaY+8J0awv9AL/Mjo9MWR/fxHfHFPP/iokjPBEgq4jOBDGNe8W0k/BTrVI3zpgZjLoi6RNGg== }
+  /@iconify-json/carbon@1.1.28:
+    resolution: { integrity: sha512-tg+h0i+69JrIqUpQva2Mt611KdLMeCyibqS7lIqaMRXJgnalHtdqDcdZAKCSLb/hTbkJHyk0NCpQSYJ3f/v51w== }
     dependencies:
       '@iconify/types': 2.0.0
     dev: false
@@ -603,9 +615,15 @@ packages:
       '@iconify/types': 2.0.0
     dev: false
 
+  /@iconify/json@2.2.171:
+    resolution: { integrity: sha512-NfmbMQpM+rUUMdLfNPEvUUrNmhp0+xshVuPsZk7c8MfGjwEnn14pb80KJlNV5toiAP/0uGAfrhJ+6WZY0nUY/A== }
+    dependencies:
+      '@iconify/types': 2.0.0
+      pathe: 1.1.1
+    dev: true
+
   /@iconify/types@2.0.0:
     resolution: { integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg== }
-    dev: false
 
   /@iconify/utils@2.1.13:
     resolution: { integrity: sha512-6uWvJIo715xYRy1KmCCyZYW0YYkLjaojEExoEkxpOHKhi9cyHW8hVKo+m8zrxzNVSqjUx9OuVRa2BWXeXfkp5A== }
@@ -913,8 +931,8 @@ packages:
     dev: false
     optional: true
 
-  /@slidev/cli@0.46.2(@types/markdown-it@13.0.7)(postcss@8.4.33)(typescript@5.3.3):
-    resolution: { integrity: sha512-RQUq3gY+cbvKLO04bcvAUIsDSfcXKd+ZpwJV9CFaPvqwYxrQZ0uBCiJH03z4chV5g6cDiRGlEKWyGHXNVjTqcg== }
+  /@slidev/cli@0.46.3(@types/markdown-it@13.0.7)(postcss@8.4.33)(typescript@5.3.3):
+    resolution: { integrity: sha512-lEQagibJCMeYpoa8usexkjiH7LCkAtzWZ2kYt/Ftv+q7Ijq9dL2NMlsBSSkcXsGUJmG7PYJXreXthQTgFAvuLw== }
     engines: { node: '>=18.0.0' }
     hasBin: true
     peerDependencies:
@@ -924,13 +942,13 @@ packages:
         optional: true
     dependencies:
       '@antfu/utils': 0.7.7
-      '@iconify-json/carbon': 1.1.27
+      '@iconify-json/carbon': 1.1.28
       '@iconify-json/ph': 1.1.10
       '@lillallol/outline-pdf': 4.0.0
       '@mrdrogdrog/optional': 1.2.1
-      '@slidev/client': 0.46.2(postcss@8.4.33)(typescript@5.3.3)(vite@5.0.12)
-      '@slidev/parser': 0.46.2
-      '@slidev/types': 0.46.2
+      '@slidev/client': 0.46.3(postcss@8.4.33)(typescript@5.3.3)(vite@5.0.12)
+      '@slidev/parser': 0.46.3
+      '@slidev/types': 0.46.3
       '@unocss/extractor-mdc': 0.58.3
       '@unocss/reset': 0.58.3
       '@vitejs/plugin-vue': 5.0.3(vite@5.0.12)(vue@3.4.15)
@@ -949,7 +967,7 @@ packages:
       import-from: 4.0.0
       is-installed-globally: 1.0.0
       jiti: 1.21.0
-      js-base64: 3.7.5
+      js-base64: 3.7.6
       katex: 0.16.9
       kolorist: 1.8.0
       local-pkg: 0.5.0
@@ -1014,13 +1032,13 @@ packages:
       - vue-template-es2015-compiler
     dev: false
 
-  /@slidev/client@0.46.2(postcss@8.4.33)(typescript@5.3.3)(vite@5.0.12):
-    resolution: { integrity: sha512-eYMk6oQaV72x0/CSYEmHXbpNwABahs1F6YTcx7+uJAqZM5oQxM8jgaU2ZbP7Pzqp4+FJ4fe935fpFr2IHqXfqw== }
+  /@slidev/client@0.46.3(postcss@8.4.33)(typescript@5.3.3)(vite@5.0.12):
+    resolution: { integrity: sha512-WTMQsagcV6S5M5KGEjoNWDcpAI5dH1ZAz4V0xTc5QuzQnk6yHvPvsJ8uINi3r/4WEMGNkNIhwLGIxWFPZMtmYQ== }
     engines: { node: '>=18.0.0' }
     dependencies:
       '@antfu/utils': 0.7.7
-      '@slidev/parser': 0.46.2
-      '@slidev/types': 0.46.2
+      '@slidev/parser': 0.46.3
+      '@slidev/types': 0.46.3
       '@unhead/vue': 1.8.10(vue@3.4.15)
       '@unocss/reset': 0.58.3
       '@vueuse/core': 10.7.2(vue@3.4.15)
@@ -1031,7 +1049,7 @@ packages:
       drauu: 0.3.7
       file-saver: 2.0.5
       fuse.js: 7.0.0
-      js-base64: 3.7.5
+      js-base64: 3.7.6
       js-yaml: 4.1.0
       katex: 0.16.9
       mermaid: 10.7.0
@@ -1056,11 +1074,11 @@ packages:
       - vite
     dev: false
 
-  /@slidev/parser@0.46.2:
-    resolution: { integrity: sha512-kqRsOKzOYWP/2qT3VqIVq5cwRSENISvKn2o4nr24w3QJ7D9yExCuEB59wWdJeGm1T1qj9gVhpaS/XAEz3NUaFA== }
+  /@slidev/parser@0.46.3:
+    resolution: { integrity: sha512-J9HGf+AIOFTQ7jZhyaYgsnN2jGGaNoyslSAW+OCXWHQYEW/2w48/wLnSQcD9DA8nHJvo49NMAW2uttpB4PCW9A== }
     engines: { node: '>=18.0.0' }
     dependencies:
-      '@slidev/types': 0.46.2
+      '@slidev/types': 0.46.3
       js-yaml: 4.1.0
     dev: false
 
@@ -1094,8 +1112,8 @@ packages:
     engines: { node: '>=14.0.0' }
     dev: false
 
-  /@slidev/types@0.46.2:
-    resolution: { integrity: sha512-noxxGNTuzItLuYMouW0sWYNk7ppdfBGTZv03YcIE2XwsNTtUwojwtK2G2IPy4LXMqPStstxOsaP1CQlP+RIzXA== }
+  /@slidev/types@0.46.3:
+    resolution: { integrity: sha512-jTrKLvYaZLf+XzKEk5PSgyRd95eurW1j3WzZx+1H0SKkpqrwGhWqaoo8edZHmCIXjOGFrBx40Yu4/c+1EYdMdQ== }
     engines: { node: '>=18.0.0' }
     dev: false
 
@@ -1580,6 +1598,17 @@ packages:
 
   /@vue/shared@3.4.15:
     resolution: { integrity: sha512-KzfPTxVaWfB+eGcGdbSf4CWdaXcGDqckoeXUh7SB3fZdEtzPCK2Vq9B/lRRL3yutax/LWITz+SwvgyOxz5V75g== }
+    dev: false
+
+  /@vueuse/components@10.7.2(vue@3.4.15):
+    resolution: { integrity: sha512-r39DLLtRo1hEKI/SQzVQjCts7yelwFyUrTxDFi821NdyU3EfQ9GCNNBcMirXcn3IQApFBRKrvTTtQ9cJGrb/+A== }
+    dependencies:
+      '@vueuse/core': 10.7.2(vue@3.4.15)
+      '@vueuse/shared': 10.7.2(vue@3.4.15)
+      vue-demi: 0.14.6(vue@3.4.15)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
     dev: false
 
   /@vueuse/core@10.7.2(vue@3.4.15):
@@ -3226,8 +3255,8 @@ packages:
     hasBin: true
     dev: false
 
-  /js-base64@3.7.5:
-    resolution: { integrity: sha512-3MEt5DTINKqfScXKfJFrRbxkrnk2AxPWGBL/ycjz4dK8iqiSJ06UxD8jh8xuh6p10TX4t2+7FsBYVxxQbMg+qA== }
+  /js-base64@3.7.6:
+    resolution: { integrity: sha512-NPrWuHFxFUknr1KqJRDgUQPexQF0uIJWjeT+2KjEePhitQxQEx5EJBG1lVn5/hc8aLycTpXrDOgPQ6Zq+EDiTA== }
     dev: false
 
   /js-tokens@4.0.0:
@@ -4027,7 +4056,6 @@ packages:
 
   /pathe@1.1.1:
     resolution: { integrity: sha512-d+RQGp0MAYTIaDBIMmOfMwz3E+LOZnxx1HZd5R18mmCZY0QBlK0LDZfPc8FW8Ed2DlvsuE6PRjroDY+wg4+j/Q== }
-    dev: false
 
   /pdf-lib@1.17.1:
     resolution: { integrity: sha512-V/mpyJAoTsN4cnP31vc0wfNA1+p20evqqnap0KLoRUN0Yk/p3wN52DOEsL4oBFcLdb76hlpKPtzJIgo67j/XLw== }

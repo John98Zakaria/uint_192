@@ -5,17 +5,22 @@
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
+    "format": "slidev format",
     "export": "slidev export"
   },
   "dependencies": {
-    "@slidev/cli": "^0.46.2",
+    "@slidev/cli": "^0.46.3",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
+    "@vueuse/components": "^10.7.2",
+    "@vueuse/core": "^10.7.2",
     "katex": "^0.16.9",
     "slidev-addon-animattr": "^1.1.2",
-    "slidev-theme-dracula": "^0.2.0"
+    "slidev-theme-dracula": "^0.2.0",
+    "vue": "^3.4.15"
   },
   "devDependencies": {
+    "@iconify/json": "^2.2.171",
     "@types/katex": "^0.16.7"
   }
 }
