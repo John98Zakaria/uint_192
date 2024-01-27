@@ -5,7 +5,7 @@ from pathlib import Path
 import shutil
 
 
-PROJECT_NAME = "BASE_10_INSPIRATION"
+PROJECT_NAME = "BASE_2_IMPLEMENTATION"
 
 OUTPUT_PATH = f"/home/jn98zk/CLionProjects/uint_192/presentation/public/{PROJECT_NAME}"
 INPUT_JSON = "/home/jn98zk/CLionProjects/uint_192/presentation/manim-animation/slides/CreateCircle.json"
@@ -55,7 +55,7 @@ layout: default
 
 <div class="grid place-items-center">
 
-<VideoComponent  src="{file_path.relative_to(output_path.parent).name}"/>
+<VideoComponent  src="{file_path.relative_to(output_path)}"/>
 
 </div>
 """
@@ -66,5 +66,5 @@ out = ""
 for file in output_paths:
     out += slidev_slide(file)
 
-with open("/home/jn98zk/CLionProjects/uint_192/presentation/slides/manim.md", "w") as f:
+with open("/home/jn98zk/CLionProjects/uint_192/presentation/slides/base_2_repr.md", "w") as f:
     f.write(out)
