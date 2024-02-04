@@ -2,10 +2,11 @@
 highlighter: shikiji
 addons:
   - slidev-addon-animattr
-title: Arbitrary-sized unsigned integers
+title: Unsigned Bigints
+transition: slide-left
 ---
 
-# Arbitrary-sized unsigned integers
+# Unsigned Bigints
 
 By John Sorial
 
@@ -40,7 +41,8 @@ Implementieren Sie nun folgende Funktionen:
 
 
 ---
-
+layout: center
+---
 # Goals
 
 * Implement the basic math operations + - * $\div$
@@ -51,22 +53,8 @@ Implementieren Sie nun folgende Funktionen:
 
 * Learn some C++ quirks
 
-
 ---
-
-<div style="display: flex; align-items: center; justify-content: center;flex-direction: column">
-    <h1>The holy rule</h1>
-    <h4>The operations of the base type must be used</h4>
-</div>
-
-## Forbidden
-
-1. Multiplication is repeated addition.
-2. Division is repeated subtraction.
-3. Manipulate bits one by one.
-
-
----
+transition: slide-up
 src: ./slides/class-structure.md
 ---
 
@@ -95,74 +83,13 @@ layout: default
 
 </div>
 
-
 ---
-layout: two-cols-header
-clicks: 7
+src: ./slides/carry-proof.md
 ---
-
-# Addition: Maximal 1 bit needs to be carried over
-
-<!-- Removes spacing caused by .katex-display -->
-
-<style>
-.katex-display{
-    display: flex;
-    padding-left: 50px;
-}
-</style>
-
-::left::
-
-$$ {1|1-2|2-3|3-4|4-5|5-6|6-7|7-8}
-
-\begin{align*}
-
-R=& (111....)_2 + (111....)_2 \\
-=& \sum_{x=0}^{n-1} 2^x + \sum_{x=0}^{n-1} 2^x \\
-
-=& \: 2*{\sum_{x=0}^{n-1} 2^x} \\
-
-=& \: 2*(2^{n} - 1)\\
-
-=& \: 2^{n+1} - 2 \\
-
-=& \: \sum_{x=0}^{n} 2^x - 1 \\
-
-=& \: \sum_{x=1}^{n} 2^x \\
-
-%<& \: 2^{n+1}
-
-=& \: (11...10)_2
-
-\end{align*}
-$$
-
-::right::
-
-$$ {1|1-2|2-3|3-4|4-5|5-6|6-7|7-8}{at:0}
-\begin{align*}
-
-R=& (1111)_2 + (1111)_2 \\
-=& \sum_{x=0}^{3} 2^x + \sum_{x=0}^{3} 2^x \\
-
-=& \: 2*{\sum_{x=0}^{3} 2^x} \\
-
-=& \: 2*(2^{4} - 1)\\
-
-=& \: 2^{5} - 2 \\
-
-=& \: \sum_{x=0}^{4} 2^x - 1 \\
-
-=& \: \sum_{x=1}^{4} 2^x = 2^{1} + 2^{2} + 2^{3} + 2^{4} \\
-
-=& \: (11110)_2
-\end{align*}
-$$
-
 
 ---
 layout: default
+transition: slide-up
 ---
 
 # Addition: Final implementation
@@ -239,43 +166,10 @@ The problem
 </div>
 
 ---
-src: ./slides/manim.md
+src: ./slides/base-10-inspiration.md
 ---
 
-layout: default
----
-
-# Multiplication
-
-<br>
-
-* Multiplication by 10 in base-10 "just add a zero on the left"
-
-<br>
-
-* The equivalent idea in base-2 is a left shift (<<)
-
-<br>
-<br>
-
-
-<div>
-
-$${1|1-2|1-3|1-4}
-\begin{align*}
-\textcolor{2e8b57}{1=(00001)_2} &&&&&& \textcolor{60a5fa}{(00001)_2 << 1} &&&&&& \textcolor{cd6090}{1 \times 2 = (
-00010)_2} \\
-\textcolor{2e8b57}{2=(00010)_2} &&&&&& \textcolor{60a5fa}{(00010)_2 << 1} &&&&&& \textcolor{cd6090}{2 \times 2 = (
-00100)_2} \\
-\textcolor{2e8b57}{4=(00100)_2} &&&&&& \textcolor{60a5fa}{(00100)_2 << 1} &&&&&& \textcolor{cd6090}{4 \times 2 = (
-01000)_2} \\
-\textcolor{2e8b57}{8=(01000)_2} &&&&&& \textcolor{60a5fa}{(01000)_2 << 1} &&&&&& \textcolor{cd6090}{8 \times 2 = (
-10000)_2} \\
-\end{align*}
-$$
-
-</div>
 
 ---
-src: ./slides/base_2_repr.md
+src: ./slides/base-2-code.md
 ---

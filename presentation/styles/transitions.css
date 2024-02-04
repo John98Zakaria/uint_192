@@ -1,0 +1,9 @@
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation-duration: 750ms;
+}
+
+::view-transition-old(video),
+::view-transition-new(video) {
+    animation-duration: 750ms;
+}

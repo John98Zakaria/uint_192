@@ -250,10 +250,10 @@ class CreateCircle(Slide):
             current_top = base_result
 
             self.play(
-                Wiggle(number_left.latex_char),
-                Wiggle(number_right.latex_char),
-                Wiggle(exponent_left.latex_char),
-                Wiggle(exponent_right.latex_char),
+                Wiggle(number_left.latex_char, rotation_angle=0.05 * TAU),
+                Wiggle(number_right.latex_char, rotation_angle=0.05 * TAU),
+                Wiggle(exponent_left.latex_char, rotation_angle=0.05 * TAU),
+                Wiggle(exponent_right.latex_char, rotation_angle=0.05 * TAU),
             )
             self.next_slide()
 

@@ -1,8 +1,10 @@
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
@@ -11,9 +13,11 @@ layout: default
 </div>
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
@@ -22,9 +26,11 @@ layout: default
 </div>
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
@@ -33,9 +39,11 @@ layout: default
 </div>
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
@@ -44,9 +52,11 @@ layout: default
 </div>
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
@@ -55,9 +65,11 @@ layout: default
 </div>
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
@@ -66,9 +78,11 @@ layout: default
 </div>
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
@@ -77,9 +91,11 @@ layout: default
 </div>
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
@@ -88,9 +104,11 @@ layout: default
 </div>
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
@@ -99,9 +117,11 @@ layout: default
 </div>
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
@@ -110,9 +130,11 @@ layout: default
 </div>
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
@@ -121,9 +143,11 @@ layout: default
 </div>
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
@@ -132,9 +156,11 @@ layout: default
 </div>
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
@@ -143,9 +169,11 @@ layout: default
 </div>
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
@@ -154,12 +182,95 @@ layout: default
 </div>
 ---
 layout: default
+transition: none
 ---
 
-# Data
+# Multiplication
+Base-10 inspiration
 
 <div class="grid place-items-center">
 
 <VideoComponent  src="BASE_10_INSPIRATION/699aff36aec3ea60b3b9c8a62b54c3216d5887f009c701986f8aa7adabe17ce2.webm"/>
 
 </div>
+
+---
+layout: default
+clicks: 7
+---
+
+# Multiplication
+Base-10 inspiration
+
+<br>
+
+<div v-show="$clicks>=1">
+
+* Multiplication by 10 in base-10 "just add a zero on the left"
+
+</div>
+
+<br>
+
+<div v-show="$clicks>=2">
+
+* The equivalent idea in base-2 is a left shift (<<)
+
+</div>
+
+<br>
+
+
+<div ref="latex" id="latex-block">
+
+$${0|1|1-2|1-3|1-4}{at:3}
+\begin{align*}
+\textcolor{2e8b57}{1=(00001)_2} &&&&&& \textcolor{60a5fa}{(00001)_2 << 1} &&&&&& \textcolor{cd6090}{1 \times 2 = (
+00010)_2} \\
+\textcolor{2e8b57}{2=(00010)_2} &&&&&& \textcolor{60a5fa}{(00010)_2 << 1} &&&&&& \textcolor{cd6090}{2 \times 2 = (
+00100)_2} \\
+\textcolor{2e8b57}{4=(00100)_2} &&&&&& \textcolor{60a5fa}{(00100)_2 << 1} &&&&&& \textcolor{cd6090}{4 \times 2 = (
+01000)_2} \\
+\textcolor{2e8b57}{8=(01000)_2} &&&&&& \textcolor{60a5fa}{(01000)_2 << 1} &&&&&& \textcolor{cd6090}{8 \times 2 = (
+10000)_2} \\
+\end{align*}
+$$
+
+</div>
+
+<script setup lang="ts">
+import {onMounted, Ref, ref, watch} from 'vue';
+
+const latex: Ref<HTMLElement> = ref();
+const clicks = $clicks;
+
+watch(clicks, (new_value,old_value) => {
+
+if (new_value>=3){
+
+latex.value.style.opacity=1
+
+} else {
+latex.value.style.opacity=0
+}
+
+
+
+})
+
+
+</script>
+
+<style>
+
+#latex-block {
+    opacity: 0;
+}
+
+#latex-block.show {
+  opacity: 1;
+  transition: opacity 500ms; 
+}
+
+
+</style>

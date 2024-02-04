@@ -85,7 +85,11 @@ $(\textcolor{green}{1}\textcolor{orange}{10011010})_{2}$
 
 <div class="col-span-2 h-full">
 
+
+<v-clicks at="6">
+
 1. Addition with overflow breaks an arithmatic rule:
+
 
 <div class="flex gap-4">
 
@@ -99,11 +103,17 @@ $(\textcolor{green}{1}\textcolor{orange}{10011010})_{2}$
   ,
   $c \geq b$
 
+
 </div>
 
 </div>
+
+
 
 2. Could the carry be just one bit ?
+
+
+</v-clicks>
 
 </div>
 

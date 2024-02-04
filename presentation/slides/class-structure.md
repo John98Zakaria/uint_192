@@ -111,7 +111,7 @@ $2^{128}+2^{64}+2^{0}$
 <div v-click class="flex flex-justify-center flex-col flex-content-center flex-items-center" >
 
 ```c++
-uint_192 ones{1,1,1};
+uint_192 ones{3,2,1};
 ```
 
 <div class="grid grid-cols-4 grid-rows-4 gap-x-9xl pa-2">
@@ -119,10 +119,10 @@ uint_192 ones{1,1,1};
         Binary
     </div>
     <div class="flex flex-justify-center">
-        00001
+        00011
     </div>
     <div class="flex flex-justify-center">
-        00001
+        00010
     </div>
     <div class="flex flex-justify-center">
         00001
@@ -131,10 +131,10 @@ uint_192 ones{1,1,1};
         Base10
     </div>
     <div class="flex flex-justify-center">
-        1
+        3
     </div>
     <div class="flex flex-justify-center">
-        1
+        2
     </div>
     <div class="flex flex-justify-center">
         1
@@ -158,7 +158,7 @@ uint_192 ones{1,1,1};
 
 <div class="-translate-y-4 translate-x-1">
 
-$2^{128}+2^{64}+2^{0}$
+$2^{129}+2^{128}+2^{65}+2^{0}$
 
 </div>
 
