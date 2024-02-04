@@ -204,7 +204,7 @@ Base-10 inspiration
 
 <br>
 
-<div v-show="$clicks>=1">
+<div class="relative" v-show="$clicks>=1">
 
 * Multiplication by 10 in base-10 "just add a zero on the left"
 
@@ -212,7 +212,7 @@ Base-10 inspiration
 
 <br>
 
-<div v-show="$clicks>=2">
+<div class="relative" v-show="$clicks>=2">
 
 * The equivalent idea in base-2 is a left shift (<<)
 
@@ -221,7 +221,7 @@ Base-10 inspiration
 <br>
 
 
-<div ref="latex" id="latex-block">
+<div v-show="$clicks>=3" ref="latex" id="latex-block" class="absolute left-250px">
 
 $${0|1|1-2|1-3|1-4}{at:3}
 \begin{align*}
@@ -238,39 +238,3 @@ $$
 
 </div>
 
-<script setup lang="ts">
-import {onMounted, Ref, ref, watch} from 'vue';
-
-const latex: Ref<HTMLElement> = ref();
-const clicks = $clicks;
-
-watch(clicks, (new_value,old_value) => {
-
-if (new_value>=3){
-
-latex.value.style.opacity=1
-
-} else {
-latex.value.style.opacity=0
-}
-
-
-
-})
-
-
-</script>
-
-<style>
-
-#latex-block {
-    opacity: 0;
-}
-
-#latex-block.show {
-  opacity: 1;
-  transition: opacity 500ms; 
-}
-
-
-</style>
