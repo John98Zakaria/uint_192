@@ -173,3 +173,48 @@ src: ./slides/base-10-inspiration.md
 ---
 src: ./slides/base-2-code.md
 ---
+
+---
+    
+# Summary
+What did we learn so far?
+
+<v-click>
+
+* Addition
+
+</v-click>
+
+<v-click>
+
+* Multiplication
+
+</v-click>
+
+<v-click>
+
+## What is left to explore ?
+
+</v-click>
+
+<v-click>
+
+* Shifting
+
+</v-click>
+
+<v-click>
+
+* Division
+
+</v-click>
+
+<v-click>
+
+* BigInt to string
+
+</v-click>
+
+---
+layout: end
+---

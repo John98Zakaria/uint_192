@@ -9,7 +9,7 @@ The naive version
 <div class="relative grid grid-cols-5 content-start place-items-stretch right-3">
 
 
-<div class="col-span-3 h-40vh flex flex-content-center flex-items-center">
+<div class="col-span-3 h-30vh flex flex-content-center flex-items-center">
 
 ```cpp {all|2|4-6|8|all}{lines:true}
 uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) {
