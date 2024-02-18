@@ -59,6 +59,10 @@ src: ./slides/class-structure.md
 ---
 
 ---
+src: ./slides/why-use-integer-base.md
+---
+
+---
 layout: section
 ---
 
