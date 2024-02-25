@@ -123,7 +123,7 @@ std::bitset<192> operator+(
 
 </div>
 
-![full-adder.svg](full-adder.svg)
+<img src="/adder.svg?skipsvgo">
 
 </div>
 

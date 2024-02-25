@@ -29,10 +29,14 @@ function respondToStreamError(err, stream) {
     stream.end();
 }
 
+function getPathFromUrl(url) {
+    return url.split("?")[0];
+}
+
 server.on('stream', (stream, headers) => {
     const reqPath = headers[HTTP2_HEADER_PATH];
     const reqMethod = headers[HTTP2_HEADER_METHOD];
-    let fullPath = path.join(serverRoot, reqPath);
+    let fullPath = path.join(serverRoot, getPathFromUrl(reqPath));
     const responseMimeType = mime.lookup(fullPath);
     const exists = fs.existsSync(fullPath)
     if (!exists){
