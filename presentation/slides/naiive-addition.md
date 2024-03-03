@@ -29,9 +29,9 @@ uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) {
 
 <div>
 
-<v-clicks >
+<div v-show="$clicks>=5">
 
-```cpp {1|1-2|all} 
+```cpp {1|1-2|all}{at:'+2'} 
 uint_192 a{0,0,0} // 0;
 uint_192 b{0,0,0}; // 0;
 auto c = a + b; 
@@ -39,7 +39,12 @@ auto c = a + b;
 // 0
 ```
 
-```cpp {1|1-2|all} 
+</div>
+
+
+<div v-show="$clicks>=5+3">
+
+```cpp {1|1-2|all}{at:'+2'}
 uint_192 a{1,2,0} // 55340232221128654848;
 uint_192 b{1,0,0}; // 1
 auto c = a + b; 
@@ -47,12 +52,11 @@ auto c = a + b;
 // 55340232221128654849
 ```
 
-</v-clicks>
+</div>
 
+<div v-show="$clicks>=5+3+3">
 
-<v-click>
-
-```cpp {1|1-2|all|all}
+```cpp {1|1-2|all|all}{at:'+2'}
 uint_192 a{UINT64_MAX,0,0} // 18446744073709551615;
 uint_192 b{1,0,0}; // 1
 auto c = a + b; 
@@ -60,12 +64,15 @@ auto c = a + b;
 // 0
 ```
 
-<div v-if="$clicks>=14" v-motion-roll-bottom>
+</div>
+
+
+<div v-if="$clicks>=13" v-motion-roll-bottom>
 <mdi-lightning-bolt color="red" class="text-4xl relative left-30 bottom-15 rotate-15"/>
 </div>
 
 
-</v-click>
+
 
 </div>
 

@@ -6,6 +6,8 @@ transition: slide-up
 <div class="grid grid-cols-3 pb">
 <div>
 
+<v-click at="1">
+
 - A byte for each bit
 
 ```cpp
@@ -14,7 +16,17 @@ char data[192];
 };
 ```
 
+</v-click>
+
+<v-click at="+4">
+
 - Each bit is easy accessible
+
+</v-click>
+
+
+<v-click at="7">
+
 
 <div class="text-red">
 
@@ -22,9 +34,14 @@ char data[192];
 
 </div>
 
+</v-click>
+
+
 </div>
 
 <div>
+<v-click at="2">
+
 
 * Exact size in raw bytes
 
@@ -34,7 +51,16 @@ char data[24];
 };
 ```
 
+</v-click>
+
+<v-click at="+1">
+
+
 - Compactness
+
+</v-click>
+
+<v-click at="8">
 
 <div class="text-red">
 
@@ -42,11 +68,15 @@ char data[24];
 
 </div>
 
+</v-click>
 
 </div>
 
 
+
 <div>
+
+<v-click at="3">
 
 - C++ Bitsets
 
@@ -56,13 +86,21 @@ std::bitset<192> data;
 };
 ```
 
+</v-click>
+
+<v-click at="+1">
+
 * Built-in shift and bit access
+
+</v-click>
+<v-click at="9">
 
 <div class="text-red">
 
 * Wasteful memory usage
 
 </div>
+</v-click>
 
 
 </div>
@@ -71,12 +109,15 @@ std::bitset<192> data;
 
 <br>
 
+<v-click at="10">
+
 <div class="grid place-self-center place-items-center relative">
+
 
 <div>
 
-
 <div class="flex flex-col flex-items-center flex-justify-center flex-content-center">
+
 
 ## General Disadvantages
 
@@ -92,6 +133,7 @@ std::bitset<192> data;
 </div>
 </div>
 
+</v-click>
 
 ---
 clicks: 1
@@ -150,7 +192,7 @@ const benchmarks: Ref<HTMLElement> = ref<HTMLElement>(null);
 
 
 watch(clicks, (new_value,_) => {
-    if (new_value === 1){
+    if (new_value >= 1){
         fullAdderGrid.value.classList.toggle("blur-2xl",true);
         benchmarks.value.classList.replace("opacity-0","opacity-100");
     } else {

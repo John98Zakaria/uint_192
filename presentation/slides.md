@@ -1,7 +1,5 @@
 ---
-highlighter: shikiji
-addons:
-  - slidev-addon-animattr
+highlighter: shiki
 title: Unsigned Bigints
 transition: slide-left
 ---

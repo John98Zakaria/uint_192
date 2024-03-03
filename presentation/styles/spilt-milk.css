@@ -1,0 +1,22 @@
+
+/* Shikiji */
+html.dark .shiki {
+    color: var(--shiki-dark, inherit);
+    background: var(--shiki-dark-bg, inherit);
+    --twoslash-popup-bg: var(--shiki-dark-bg, inherit);
+}
+
+html.dark .shiki span {
+    color: var(--shiki-dark);
+}
+
+html:not(.dark) .shiki {
+    color: var(--shiki-light, inherit);
+    background: var(--shiki-light-bg, inherit);
+    --twoslash-popup-bg: var(--shiki-light-bg, inherit);
+}
+
+html:not(.dark) .shiki span {
+    color: var(--shiki-light);
+}
+
