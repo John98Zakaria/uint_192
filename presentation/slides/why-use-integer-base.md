@@ -140,6 +140,9 @@ clicks: 1
 ---
 # Why use integers as basis for big integers? 
 
+<br>
+<br>
+
 <div ref="fullAdderGrid" class="grid grid-cols-2">
 
 <div>
@@ -155,8 +158,7 @@ std::bitset<192> operator+(
     for (std::size_t i = 0; i < 192; ++i) {
         sum[i] = a[i] ^ b[i] ^ carry;
         carry = (a[i] & b[i]) 
-                | (a[i] & carry) 
-                | (b[i] & carry);
+                | ((a[i] ^ b[i]) & carry) 
     }
     return sum;
 }
@@ -172,11 +174,11 @@ std::bitset<192> operator+(
 <div ref="benchmarks" class="absolute top-50 left-65 opacity-0">
 
 ```
---------------------------------------------------------------
-Benchmark                    Time             CPU   Iterations
---------------------------------------------------------------
-BM_FullAdderCircuit    6593437 ns      6592864 ns          110
-BM_Number_Basis           6990 ns         6990 ns       100156
+---------------------------------------------------------------------
+Benchmark                           Time             CPU   Iterations
+---------------------------------------------------------------------
+BM_10_000_FullAdderCircuit    6760618 ns      6758978 ns          102
+BM_10_000_ALU                    7309 ns         7308 ns       100011
 ```
 
 </div>

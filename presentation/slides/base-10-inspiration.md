@@ -203,7 +203,7 @@ Base-10 inspiration
 
 <br>
 
-<div class="relative" v-show="$clicks>=1">
+<div class="relative">
 
 * Multiplication by 10 in base-10 "just add a zero on the left"
 
@@ -211,7 +211,7 @@ Base-10 inspiration
 
 <br>
 
-<div class="relative" v-show="$clicks>=2">
+<div class="relative" v-show="$clicks>=1">
 
 * The equivalent idea in base-2 is a left shift (<<)
 
@@ -220,7 +220,7 @@ Base-10 inspiration
 <br>
 
 
-<div v-show="$clicks>=3" ref="latex" id="latex-block" class="absolute left-250px">
+<div v-show="$clicks>=2" ref="latex" id="latex-block" class="absolute left-250px">
 
 $${0|1|1-2|1-3|1-4}{at:3}
 \begin{align*}
