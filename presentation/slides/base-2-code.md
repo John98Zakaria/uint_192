@@ -20,7 +20,7 @@ transition: view-transition
 
 <div class="absolute left-1">
 
-```cpp {0|5-10|6,9|5-6,8-9,12,19,21|6,10|5,8,6,10,13,17-18,22|7,9|7-9,14,17-18,23|7,10|7-8,10,15,17,24|all}{lines:true,maxHeight:'400px'}
+```cpp {0|5-10|6,9|5-6,8-9,12,17,19,21|6,10|5,8,6,10,13,17-18,22|7,9|7-9,14,17-18,23|7,10|7-8,10,15,17,24|all}{lines:true,maxHeight:'400px'}
 uint_192 operator*(const uint_192 &lhs, const uint_192 &rhs) {
 
 uint_192 result{};

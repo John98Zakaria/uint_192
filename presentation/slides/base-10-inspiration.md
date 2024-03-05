@@ -205,7 +205,7 @@ Base-10 inspiration
 
 <div class="relative">
 
-* Multiplication by 10 in base-10 "just add a zero on the left"
+* Multiplication by 10 in base-10 "just add a zero on the right"
 
 </div>
 

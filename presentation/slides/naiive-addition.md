@@ -1,6 +1,6 @@
 ---
 layout: default
-clicks: 13
+clicks: 9
 ---
 
 # Addition
@@ -12,7 +12,7 @@ The naive version
 
 <div class="col-span-3 h-30vh flex flex-content-center flex-items-center">
 
-```cpp {all|2|4-6|8|all}{lines:true}
+```cpp {all}{lines:true}
 uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) {
     uint_192 result{};
     
@@ -30,7 +30,7 @@ uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) {
 
 <div>
 
-<div v-show="$clicks>=5">
+<div v-show="$clicks>=1">
 
 ```cpp {1|1-2|all}{at:'+2'} 
 uint_192 a{0,0,0} // 0;
@@ -43,7 +43,7 @@ auto c = a + b;
 </div>
 
 
-<div v-show="$clicks>=5+3">
+<div v-show="$clicks>=1+3">
 
 ```cpp {1|1-2|all}{at:'+2'}
 uint_192 a{1,2,0} // 55340232221128654848;
@@ -55,7 +55,7 @@ auto c = a + b;
 
 </div>
 
-<div v-show="$clicks>=5+3+3">
+<div v-show="$clicks>=1+3+3">
 
 ```cpp {1|1-2|all|all}{at:'+2'}
 uint_192 a{UINT64_MAX,0,0} // 18446744073709551615;
@@ -68,7 +68,7 @@ auto c = a + b;
 </div>
 
 
-<div v-if="$clicks>=13" v-motion-roll-bottom>
+<div v-if="$clicks>=9" v-motion-roll-bottom>
 <mdi-lightning-bolt color="red" class="text-4xl relative left-30 bottom-15 rotate-15"/>
 </div>
 

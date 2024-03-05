@@ -110,7 +110,7 @@ $(\textcolor{green}{1}\textcolor{orange}{10011010})_{2}$
 
 
 
-2. Could the carry be just one bit ?
+2. Is the carry just one bit ?
 
 
 </v-clicks>

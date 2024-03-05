@@ -37,20 +37,6 @@ Implementieren Sie nun folgende Funktionen:
 
 </div>
 
-
----
-layout: center
----
-# Goals
-
-* Implement the basic math operations + - * $\div$
-
-* Implement some bitwise operations >>
-
-* Logical operators = < >
-
-* Learn some C++ quirks
-
 ---
 transition: slide-up
 src: ./slides/class-structure.md
@@ -81,7 +67,7 @@ layout: default
 
 <div class="flex flex-justify-center flex-items-center flex-col flex h-90">
 
-## Is the carry just a bit?
+## Is the carry just one bit ?
 
 </div>
 
