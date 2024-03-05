@@ -98,6 +98,20 @@ transition: slide-up
 
 <div class="relative left-25 top-30">
 
+````md magic-move
+
+```cpp {all}{lines:true}
+constexpr uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) noexcept {
+    uint_192 result{};
+
+    for (uint64_t i = 0; i < lhs.parts.size(); ++i) {
+        result.parts[i] += carry_bit;
+        result.parts[i] += lhs.parts[i] + rhs.parts[i];
+    }
+    return result;
+}
+```
+
 ```cpp {all}{lines:true}
 constexpr uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) noexcept {
     uint_192 result{};
@@ -112,6 +126,7 @@ constexpr uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) noexcept 
 }
 ```
 
+````
 </div>
 
 

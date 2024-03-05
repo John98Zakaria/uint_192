@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@slidev/cli':
-    specifier: 0.48.0-beta.20
-    version: 0.48.0-beta.20(@types/markdown-it@13.0.7)(postcss@8.4.35)
+    specifier: 0.48.0-beta.22
+    version: 0.48.0-beta.22(@types/markdown-it@13.0.7)(postcss@8.4.35)
   '@slidev/theme-default':
     specifier: latest
     version: 0.25.0
@@ -621,14 +621,20 @@ packages:
     resolution: {integrity: sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==}
     dev: false
 
-  /@iconify-json/carbon@1.1.30:
-    resolution: {integrity: sha512-tEvEmxCO0J0t0p2NT2IvJ+iiSNqqnabygSo/S8wkeh2Guhc4tQOgl9dxvDMpy6RqwtKRTKsaROPtnRfu/bl+Tg==}
+  /@iconify-json/carbon@1.1.31:
+    resolution: {integrity: sha512-CAvECFfiwGyZmlcuM2JLMRDEN3VsIEZv6lml7Xf+3giQ5oXloADm0b5wiVPFZmONKM5jXERmx+E7YSvAtFJIbw==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false
 
   /@iconify-json/ph@1.1.11:
     resolution: {integrity: sha512-izLvLZrU7WM03zNwNWNrAySv3i45hM3D3K6USjCGBSQMUG0HB8zxwrMf4O0leDrganmuQBH7Z0DWTgyH1ET/fg==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
+
+  /@iconify-json/svg-spinners@1.1.2:
+    resolution: {integrity: sha512-Aab6SqkORaTJ1W+ooufn6C8BsBitrn3uk8iRQLPA6pjhyvQAhkKCGMctyXIL5ZjrycnoFVsZ4mx7KnwEMra8qg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: false
@@ -720,10 +726,6 @@ packages:
 
   /@mdit-vue/types@2.0.0:
     resolution: {integrity: sha512-1BeEB+DbtmDMUAfvbNUj5Hso8cSl2sBVK2iTyOMAqhfDVLdh+/9+D0JmQHaCeUk/vuJoMhOwbweZvh55wHxm4w==}
-    dev: false
-
-  /@mrdrogdrog/optional@1.2.1:
-    resolution: {integrity: sha512-8JdrQautBZ+nxTC29Sp7z/plyONdgPDjCbFTf6Iih5spZKW18EmP2D4zd48wG9Nn0Qpe8f0p9f8/94SlZFl4tQ==}
     dev: false
 
   /@nodelib/fs.scandir@2.1.5:
@@ -1002,8 +1004,8 @@ packages:
     dev: false
     optional: true
 
-  /@slidev/cli@0.48.0-beta.20(@types/markdown-it@13.0.7)(postcss@8.4.35):
-    resolution: {integrity: sha512-vkEtyTKEz1izkznlGQUDHV7z8V+5xmXX9BuV5uqaUgvIt41PEqZUTogzHEMHLy8Yeh8nMAAI0F56ZNjaSlBrVQ==}
+  /@slidev/cli@0.48.0-beta.22(@types/markdown-it@13.0.7)(postcss@8.4.35):
+    resolution: {integrity: sha512-K3kHNj/MumDbLKmcmogGcoBFLISLGjzXIXynn52u2a9hNxMxnKHZQZ1pfylY/Je3hGNrpIIGjTczts/ObhR+Fg==}
     engines: {node: '>=18.0.0'}
     hasBin: true
     peerDependencies:
@@ -1014,16 +1016,16 @@ packages:
     dependencies:
       '@antfu/ni': 0.21.12
       '@antfu/utils': 0.7.7
-      '@iconify-json/carbon': 1.1.30
+      '@iconify-json/carbon': 1.1.31
       '@iconify-json/ph': 1.1.11
+      '@iconify-json/svg-spinners': 1.1.2
       '@lillallol/outline-pdf': 4.0.0
-      '@mrdrogdrog/optional': 1.2.1
       '@shikijs/markdown-it': 1.1.7
       '@shikijs/twoslash': 1.1.7(typescript@5.3.3)
       '@shikijs/vitepress-twoslash': 1.1.7(typescript@5.3.3)
-      '@slidev/client': 0.48.0-beta.20(postcss@8.4.35)(vite@5.1.4)
-      '@slidev/parser': 0.48.0-beta.20
-      '@slidev/types': 0.48.0-beta.20
+      '@slidev/client': 0.48.0-beta.22(postcss@8.4.35)(vite@5.1.4)
+      '@slidev/parser': 0.48.0-beta.22
+      '@slidev/types': 0.48.0-beta.22
       '@unocss/extractor-mdc': 0.58.5
       '@unocss/reset': 0.58.5
       '@vitejs/plugin-vue': 5.0.4(vite@5.1.4)(vue@3.4.21)
@@ -1061,7 +1063,7 @@ packages:
       resolve-global: 2.0.0
       semver: 7.6.0
       shiki: 1.1.7
-      shiki-magic-move: 0.1.0(shiki@1.1.7)(vue@3.4.21)
+      shiki-magic-move: 0.3.1(shiki@1.1.7)(vue@3.4.21)
       sirv: 2.0.4
       typescript: 5.3.3
       unocss: 0.58.5(postcss@8.4.35)(vite@5.1.4)
@@ -1101,20 +1103,21 @@ packages:
       - vue-template-es2015-compiler
     dev: false
 
-  /@slidev/client@0.48.0-beta.20(postcss@8.4.35)(vite@5.1.4):
-    resolution: {integrity: sha512-0cl9H3yKM/TdTdCpprLeb2CneJolKXIgqL+QQz34nd/aXvRpZdDK/fXXSgzcnmV7kQ+r1RD6SGghe0VIisub3A==}
+  /@slidev/client@0.48.0-beta.22(postcss@8.4.35)(vite@5.1.4):
+    resolution: {integrity: sha512-Ep9dI6lNGemrHzUzYMDeNushP8IcQvesnbAV+qWA4l8CC4Y3rSYRXccTeT/vG5p32vYC/VQcucpV+Rsk27NaOA==}
     engines: {node: '>=18.0.0'}
     dependencies:
       '@antfu/utils': 0.7.7
-      '@iconify-json/carbon': 1.1.30
+      '@iconify-json/carbon': 1.1.31
       '@iconify-json/ph': 1.1.11
+      '@iconify-json/svg-spinners': 1.1.2
       '@shikijs/monaco': 1.1.7
       '@shikijs/vitepress-twoslash': 1.1.7(typescript@5.3.3)
-      '@slidev/parser': 0.48.0-beta.20
+      '@slidev/parser': 0.48.0-beta.22
       '@slidev/rough-notation': 0.1.0
-      '@slidev/types': 0.48.0-beta.20
+      '@slidev/types': 0.48.0-beta.22
       '@typescript/ata': 0.9.4(typescript@5.3.3)
-      '@unhead/vue': 1.8.10(vue@3.4.21)
+      '@unhead/vue': 1.8.11(vue@3.4.21)
       '@unocss/reset': 0.58.5
       '@vueuse/core': 10.9.0(vue@3.4.21)
       '@vueuse/math': 10.9.0(vue@3.4.21)
@@ -1132,7 +1135,7 @@ packages:
       prettier: 3.2.5
       recordrtc: 5.6.2
       shiki: 1.1.7
-      shiki-magic-move: 0.1.0(shiki@1.1.7)(vue@3.4.21)
+      shiki-magic-move: 0.3.1(shiki@1.1.7)(vue@3.4.21)
       typescript: 5.3.3
       unocss: 0.58.5(postcss@8.4.35)(vite@5.1.4)
       vue: 3.4.21(typescript@5.3.3)
@@ -1147,11 +1150,11 @@ packages:
       - vite
     dev: false
 
-  /@slidev/parser@0.48.0-beta.20:
-    resolution: {integrity: sha512-qtD6JB50Ho+ecgrg3L3W5Llaf6Gi5YGxkvXNQWp1ULr4dwz9Z8Tnp437pCrkUYpp+ecqQZE1TBZWrmHtIAHFUg==}
+  /@slidev/parser@0.48.0-beta.22:
+    resolution: {integrity: sha512-YtdKCc+re8PHSIRQULVDJFThcN2dQFAcp3Nd4N0tnRKhUcsRXdY8YyfirS0uqGXKsXUNCZuISO9sxhNRStxuPg==}
     engines: {node: '>=18.0.0'}
     dependencies:
-      '@slidev/types': 0.48.0-beta.20
+      '@slidev/types': 0.48.0-beta.22
       js-yaml: 4.1.0
     dev: false
 
@@ -1189,8 +1192,8 @@ packages:
     engines: {node: '>=18.0.0'}
     dev: false
 
-  /@slidev/types@0.48.0-beta.20:
-    resolution: {integrity: sha512-x321hftEQXUTg2rApn0gnXgo7TJKYvrCWc5ZRqWt0gx2WB9yhr5NGOopErPWl6q1QaNWgMCy1UMWt5qpCwpj4g==}
+  /@slidev/types@0.48.0-beta.22:
+    resolution: {integrity: sha512-UL+kTAqlf+H8g0c513LJL/zMnXismOaX0AzAz0IKeWRAKhtkDN2oiTGCEAT2qji+nuyakx3qDq6A4+ht9U0aCQ==}
     engines: {node: '>=18.0.0'}
     dev: false
 
@@ -1302,35 +1305,35 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: false
 
-  /@unhead/dom@1.8.10:
-    resolution: {integrity: sha512-dBeDbHrBjeU+eVgMsD91TGEazb1dwLrY0x/ve01CldMCmm+WcRu++SUW7s1QX84mzGH2EgFz78o1OPn6jpV3zw==}
+  /@unhead/dom@1.8.11:
+    resolution: {integrity: sha512-B5Bae4Y+6/2oDlfNJwEuf1kApyM4pmZ01VReWcVDYAdZpkD7eZZoVZnF945MluaMb6SMvGIXejcSUXTH/BOWaQ==}
     dependencies:
-      '@unhead/schema': 1.8.10
-      '@unhead/shared': 1.8.10
+      '@unhead/schema': 1.8.11
+      '@unhead/shared': 1.8.11
     dev: false
 
-  /@unhead/schema@1.8.10:
-    resolution: {integrity: sha512-cy8RGOPkwOVY5EmRoCgGV8AqLjy/226xBVTY54kBct02Om3hBdpB9FZa9frM910pPUXMI8PNmFgABO23O7IdJA==}
+  /@unhead/schema@1.8.11:
+    resolution: {integrity: sha512-Aok9sZcVznJxjBRF/v2LKaeoqgYU/9kuyknYhf3M13byrdp3dLD6qcUvnLC98PrPVy7CMfOov4kXHoI/DRY5MQ==}
     dependencies:
       hookable: 5.5.3
       zhead: 2.2.4
     dev: false
 
-  /@unhead/shared@1.8.10:
-    resolution: {integrity: sha512-pEFryAs3EmV+ShDQx2ZBwUnt5l3RrMrXSMZ50oFf+MImKZNARVvD4+3I8fEI9wZh+Zq0JYG3UAfzo51MUP+Juw==}
+  /@unhead/shared@1.8.11:
+    resolution: {integrity: sha512-Mz3pAJUq160mPXYFNUalfyEDQ0a6eRIbMlJFQ7HNy8shM+4kbeKgInoaa2EaFF8zRrhYvuLJZhyLk5kFINSmBg==}
     dependencies:
-      '@unhead/schema': 1.8.10
+      '@unhead/schema': 1.8.11
     dev: false
 
-  /@unhead/vue@1.8.10(vue@3.4.21):
-    resolution: {integrity: sha512-KF8pftHnxnlBlgNpKXWLTg3ZUtkuDCxRPUFSDBy9CtqRSX/qvAhLZ26mbqRVmHj8KigiRHP/wnPWNyGnUx20Bg==}
+  /@unhead/vue@1.8.11(vue@3.4.21):
+    resolution: {integrity: sha512-yEpQaBYQsqld3m6lexMP+Vf0+j2UdY/QIO98b7v2XBm200ruZmRvI4IJDMrI8cODVwSnwQWHDLF2upXlNeQ4Qg==}
     peerDependencies:
       vue: '>=2.7 || >=3'
     dependencies:
-      '@unhead/schema': 1.8.10
-      '@unhead/shared': 1.8.10
+      '@unhead/schema': 1.8.11
+      '@unhead/shared': 1.8.11
       hookable: 5.5.3
-      unhead: 1.8.10
+      unhead: 1.8.11
       vue: 3.4.21(typescript@5.3.3)
     dev: false
 
@@ -2527,6 +2530,10 @@ packages:
     resolution: {integrity: sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==}
     dependencies:
       dequal: 2.0.3
+    dev: false
+
+  /diff-match-patch-es@0.1.0:
+    resolution: {integrity: sha512-y+HzthUzXXodKmawgRo9gQivKhY/NGzkZURFMQWSWsdRpOpkjjmX9DfDWB/T4a3blVqKoXL6f8Spq1+dLd+csQ==}
     dev: false
 
   /diff@5.2.0:
@@ -4138,7 +4145,6 @@ packages:
     resolution: {integrity: sha512-zuHHiGTYTA1sYJ/wZN+t5HKZaH23i4yI1HMwbuXm24Nid7Dv0KcuRlKoNKS9UNfAVSBlnGLcuQrnOKWOZoEGaw==}
     requiresBuild: true
     dev: false
-    optional: true
 
   /on-finished@2.3.0:
     resolution: {integrity: sha512-ikqdkGAAyf/X/gPhXGvfgAytDZtDbr+bkNUJ0N9h5MI/dmdgCs3l6hoHrcUv41sRKew3jIwrp4qQDXiK99Utww==}
@@ -4532,13 +4538,19 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /shiki-magic-move@0.1.0(shiki@1.1.7)(vue@3.4.21):
-    resolution: {integrity: sha512-xvOobJP+RDJkMuuxSpa32yaabDQW2qHnkrvOq+XeLddVo/fsr2j4vIyKTSg6a5ehWd9NGX1Omz0D3r8EIfZ/1g==}
+  /shiki-magic-move@0.3.1(shiki@1.1.7)(vue@3.4.21):
+    resolution: {integrity: sha512-LxNym0MoetHz3el/vI7tJCWDkH4k0Coizjfn/yPjfWvMlU+yss5eN/tD/KXaGNQ2voyrQHQyp+cLn2iiuXlRzg==}
     peerDependencies:
       shiki: ^1.1.6
       vue: ^3.4.0
+    peerDependenciesMeta:
+      shiki:
+        optional: true
+      vue:
+        optional: true
     dependencies:
-      '@vue/shared': 3.4.21
+      diff-match-patch-es: 0.1.0
+      ohash: 1.1.3
       shiki: 1.1.7
       vue: 3.4.21(typescript@5.3.3)
     dev: false
@@ -4790,12 +4802,12 @@ packages:
     dev: false
     optional: true
 
-  /unhead@1.8.10:
-    resolution: {integrity: sha512-dth8FvZkLriO5ZWWOBIYBNSfGiwJtKcqpPWpSOk/Z0e2jdlgwoZEWZHFyte0EKvmbZxKcsWNMqIuv7dEmS5yZQ==}
+  /unhead@1.8.11:
+    resolution: {integrity: sha512-g1coK+pRv+RbeD4+hK76FV6Y++i5jY99CftKyP1ARQcLCbz0ri6+vBpWMS4d+h7x0DfWSCGm/wWkPQ1WXWHfRA==}
     dependencies:
-      '@unhead/dom': 1.8.10
-      '@unhead/schema': 1.8.10
-      '@unhead/shared': 1.8.10
+      '@unhead/dom': 1.8.11
+      '@unhead/schema': 1.8.11
+      '@unhead/shared': 1.8.11
       hookable: 5.5.3
     dev: false
 

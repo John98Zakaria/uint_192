@@ -86,7 +86,7 @@ $(\textcolor{green}{1}\textcolor{orange}{10011010})_{2}$
 <div class="col-span-2 h-full">
 
 
-<v-clicks at="6">
+<v-clicks at="7">
 
 1. Addition with overflow breaks an arithmatic rule:
 
@@ -121,8 +121,6 @@ $(\textcolor{green}{1}\textcolor{orange}{10011010})_{2}$
 
 
 
-<div v-click/>
-<div v-click/>
 
 <script setup lang="ts">
 const relativeBinary = "relative left-60 bottom-10.8";

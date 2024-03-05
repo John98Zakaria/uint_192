@@ -196,7 +196,6 @@ Base-10 inspiration
 
 ---
 layout: default
-clicks: 7
 ---
 
 # Multiplication
