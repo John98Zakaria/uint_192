@@ -167,7 +167,7 @@ std::bitset<192> operator+(
 
 </div>
 
-<img src="/adder.svg?skipsvgo">
+<img src="/adder.svg">
 
 </div>
 
