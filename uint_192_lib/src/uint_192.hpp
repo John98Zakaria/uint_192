@@ -179,6 +179,43 @@ using div_mod_uint64_remider = uint192_div_rem<uint64_t>;
     return result;
 }
 
+[[nodiscard]] div_mod_uint64_remider div_mod(uint_192 dividend, uint64_t divisor) {
+    constexpr uint64_t BASE = (1ull << 32);
+    if (dividend[2] !=0 || dividend[1] >= divisor) {
+        throw std::invalid_argument("Overflow");
+    }
+
+    const auto normalizing_shift = static_cast<uint32_t>(__builtin_clzll(divisor));
+    dividend = dividend << normalizing_shift;
+    divisor <<= normalizing_shift;
+
+    uint64_t divisor_upper_part = divisor >> UINT32_WIDTH;
+    uint64_t divisor_lower_part = divisor & LOWER_BITMASK;
+
+    uint64_t partial_reminder = dividend.parts[dividend.parts.size() - 2];
+    std::array<std::uint64_t, 3> lower_dividend{dividend.parts[1] & LOWER_BITMASK, dividend.parts[0] >> UINT32_WIDTH,
+                                                0};
+    std::array<std::uint64_t, 3> quotients{};
+    for (uint64_t part_index = dividend.parts.size() - 2; part_index < static_cast<uint64_t>(-1); --part_index) {
+        uint64_t dividend_lower_part = lower_dividend[part_index];
+        // q_hat
+        auto estimated_quotient = partial_reminder / divisor_upper_part;
+        // r_hat
+        auto const estimated_rest = partial_reminder % divisor_upper_part;
+
+        auto const c1 = estimated_quotient * divisor_lower_part;
+        auto const c2 = estimated_rest * BASE + dividend_lower_part;
+        if (c1 > c2) {
+            estimated_quotient -= (c1 - c2 > divisor) ? 2 : 1;
+        }
+        quotients[part_index] = estimated_quotient;
+
+        partial_reminder = partial_reminder * BASE + dividend_lower_part - quotients[part_index] * divisor;
+    }
+
+    return {{quotients[1] << UINT32_WIDTH | quotients[0]}, partial_reminder >> normalizing_shift};
+}
+
 constexpr uint_192 operator/(const uint_192 &dividend, const uint32_t divisor) {
     return div_mod(dividend, divisor).quotient;
 }
