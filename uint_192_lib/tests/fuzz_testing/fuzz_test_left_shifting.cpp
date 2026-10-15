@@ -13,10 +13,7 @@ TEST_CASE("Compare left shift implementation to GMP") {
     REQUIRE(strip_leading_zeros(num_GMP.get_str(2)) == strip_leading_zeros(num_uint192.to_bin_string()));
 
     const auto num_uint192_result = num_uint192 << shift_by;
-    const auto GMP_result_bits = strip_leading_zeros(mpz_class(num_GMP << shift_by).get_str(2));
 
-    const auto uint192_result_bits = strip_leading_zeros(num_uint192_result.to_bin_string());
-    bool isOk = GMP_result_bits.find(uint192_result_bits) != std::string::npos;
-
-    REQUIRE(isOk);
+    // Bits shifted past the 192nd bit are dropped
+    REQUIRE(from_uint192(num_uint192_result) == wrap_to_192_bits(mpz_class(num_GMP << shift_by)));
 }

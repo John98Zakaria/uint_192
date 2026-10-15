@@ -5,22 +5,24 @@
 #include "catch2_uint192_generator.hpp"
 #include <catch2/catch_test_macros.hpp>
 
+// Products that do not fit into 192 bits wrap around, exactly like the built-in unsigned types
+void compare_multiplication_to_GMP(const uint192_lib::uint_192 &lhs_uint192, const uint192_lib::uint_192 &rhs_uint192) {
+    CAPTURE(lhs_uint192);
+    CAPTURE(rhs_uint192);
+    const auto result_uint192 = lhs_uint192 * rhs_uint192;
+    CAPTURE(result_uint192);
+
+    REQUIRE(from_uint192(result_uint192) == wrap_to_192_bits(from_uint192(lhs_uint192) * from_uint192(rhs_uint192)));
+}
+
 TEST_CASE("Compare multiplication to GMP") {
     const auto lhs_uint192 = GENERATE(take(120, randomUint192(UINT64_MAX, UINT64_MAX, UINT64_MAX)));
     const auto rhs_uint192 = GENERATE(take(120, randomUint192(UINT64_MAX, UINT64_MAX, UINT64_MAX)));
-    const auto lhs_GMP = from_uint192(lhs_uint192);
-    const auto rhs_GMP = from_uint192(rhs_uint192);
+    compare_multiplication_to_GMP(lhs_uint192, rhs_uint192);
+}
 
-    REQUIRE(strip_leading_zeros(lhs_GMP.get_str(2)) == strip_leading_zeros(lhs_uint192.to_bin_string()));
-
-    const auto result_uint192 = lhs_uint192 * rhs_uint192;
-    const auto result_GMP = mpz_class(lhs_GMP * rhs_GMP);
-
-    const auto GMP_result_bits = strip_leading_zeros(result_GMP.get_str(2));
-    if (GMP_result_bits.length() > 192) {
-        SKIP("RESULT is too big");
-    }
-    const auto uint192_result_bits = strip_leading_zeros(result_uint192.to_bin_string());
-
-    REQUIRE(GMP_result_bits == uint192_result_bits);
+TEST_CASE("Compare multiplication to GMP with edge values") {
+    const auto lhs_uint192 = GENERATE(take(120, edgeBiasedUint192()));
+    const auto rhs_uint192 = GENERATE(take(120, edgeBiasedUint192()));
+    compare_multiplication_to_GMP(lhs_uint192, rhs_uint192);
 }
