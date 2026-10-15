@@ -16,9 +16,11 @@ struct uint_192 {
         uint64_t carry_bit{0};
 
         for (uint64_t i = 0; i < this->parts.size(); ++i) {
-            this->parts[i] += carry_bit;
-            this->parts[i] += rhs.parts[i];
-            carry_bit = this->parts[i] < rhs.parts[i];
+            // Each of the two additions can overflow on its own, so the carry has to be checked after each of them
+            const uint64_t partial_sum = this->parts[i] + rhs.parts[i];
+            const uint64_t partial_carry = partial_sum < rhs.parts[i];
+            this->parts[i] = partial_sum + carry_bit;
+            carry_bit = partial_carry | (this->parts[i] < partial_sum);
         }
 
         return *this;
@@ -49,21 +51,24 @@ constexpr uint_192 operator+(const uint_192 &lhs, const uint_192 &rhs) noexcept 
     uint64_t carry_bit{0};
 
     for (uint64_t i = 0; i < lhs.parts.size(); ++i) {
-        result.parts[i] += carry_bit;
-        result.parts[i] += lhs.parts[i] + rhs.parts[i];
-        carry_bit = result.parts[i] < lhs.parts[i];
+        // Each of the two additions can overflow on its own, so the carry has to be checked after each of them
+        const uint64_t partial_sum = lhs.parts[i] + rhs.parts[i];
+        const uint64_t partial_carry = partial_sum < lhs.parts[i];
+        result.parts[i] = partial_sum + carry_bit;
+        carry_bit = partial_carry | (result.parts[i] < partial_sum);
     }
     return result;
 }
 
 constexpr uint_192 operator-(const uint_192 &lhs, const uint_192 &rhs) noexcept {
     uint_192 result{};
-    uint64_t carry_bit{0};
-    uint64_t subtrahend{};
+    uint64_t borrow_bit{0};
     for (uint64_t i = 0; i < lhs.parts.size(); ++i) {
-        subtrahend = rhs.parts[i] + carry_bit;
-        carry_bit = lhs.parts[i] < subtrahend;
-        result.parts[i] = lhs.parts[i] - subtrahend;
+        // Each of the two subtractions can underflow on its own, so the borrow has to be checked after each of them
+        const uint64_t partial_difference = lhs.parts[i] - rhs.parts[i];
+        const uint64_t partial_borrow = lhs.parts[i] < rhs.parts[i];
+        result.parts[i] = partial_difference - borrow_bit;
+        borrow_bit = partial_borrow | (partial_difference < borrow_bit);
     }
     return result;
 }

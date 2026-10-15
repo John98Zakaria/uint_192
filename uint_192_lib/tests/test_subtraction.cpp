@@ -126,7 +126,7 @@ SCENARIO("Subtraction") {
 
         THEN("Subtracting it from {1,0,0} should reduce the result by 1") {
             const auto result = a - uint192_lib::uint_192{1};
-            REQUIRE(result.parts[0] == UINT64_MAX -1Ul);
+            REQUIRE(result.parts[0] == UINT64_MAX - 1Ul);
         }
     }
 
@@ -145,20 +145,43 @@ SCENARIO("Subtraction") {
 
         THEN("Subtracting it from {1,0,0} should reduce the result by 1 in the correct position") {
             const auto result = a - uint192_lib::uint_192{1};
-            REQUIRE(result.parts[0] == UINT64_MAX -1Ul);
+            REQUIRE(result.parts[0] == UINT64_MAX - 1Ul);
             REQUIRE(result.parts[1] == UINT64_MAX);
         }
 
         THEN("Subtracting it from {1,1,0} should reduce the result by 1 in the correct positions") {
-            const auto result = a - uint192_lib::uint_192{1,1};
-            REQUIRE(result.parts[0] == UINT64_MAX -1Ul);
-            REQUIRE(result.parts[1] == UINT64_MAX -1Ul);
+            const auto result = a - uint192_lib::uint_192{1, 1};
+            REQUIRE(result.parts[0] == UINT64_MAX - 1Ul);
+            REQUIRE(result.parts[1] == UINT64_MAX - 1Ul);
         }
         THEN("Subtracting it from {1,UINT64_MAX,0} should be correct") {
-            const auto result = a - uint192_lib::uint_192{1,UINT64_MAX};
-            REQUIRE(result.parts[0] == UINT64_MAX -1Ul);
+            const auto result = a - uint192_lib::uint_192{1, UINT64_MAX};
+            REQUIRE(result.parts[0] == UINT64_MAX - 1Ul);
             REQUIRE(result.parts[1] == 0);
         }
+    }
+}
 
+SCENARIO("Subtraction borrows through parts of UINT64_MAX") {
+
+    GIVEN("A uint_192 of value {0,0,1}") {
+        uint192_lib::uint_192 a{0, 0, 1};
+
+        THEN("Subtracting {1,UINT64_MAX,0} should result in {UINT64_MAX,0,0}") {
+            const auto result = a - uint192_lib::uint_192{1, UINT64_MAX};
+            REQUIRE(result == uint192_lib::uint_192{UINT64_MAX, 0, 0});
+        }
+
+        THEN("Subtracting {1,0,0} should borrow through the middle part") {
+            const auto result = a - uint192_lib::uint_192{1};
+            REQUIRE(result == uint192_lib::uint_192{UINT64_MAX, UINT64_MAX, 0});
+        }
+    }
+
+    GIVEN("A uint_192 of value {0,0,0}") {
+        THEN("Subtracting {1,UINT64_MAX,UINT64_MAX} should underflow to {UINT64_MAX,0,0}") {
+            const auto result = ZERO - uint192_lib::uint_192{1, UINT64_MAX, UINT64_MAX};
+            REQUIRE(result == uint192_lib::uint_192{UINT64_MAX, 0, 0});
+        }
     }
 }
